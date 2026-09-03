@@ -1,4 +1,5 @@
 import { workflow } from '../content/site.js';
+import engagementRoom from '../assets/img/engagement-room.jpg';
 
 export default function EngagementWorkflow() {
   return (
@@ -7,6 +8,12 @@ export default function EngagementWorkflow() {
         <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
           {workflow.heading}
         </h2>
+
+        <img
+          src={engagementRoom}
+          alt=""
+          className="mb-12 h-64 w-full border border-dark/15 object-cover md:h-80 lg:h-96"
+        />
 
         <ol className="grid gap-8 md:grid-cols-3 md:gap-10">
           {workflow.steps.map((step) => (

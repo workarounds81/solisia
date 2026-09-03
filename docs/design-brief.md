@@ -105,6 +105,27 @@ gives no evidence either way for the off-white token.
 
 ## Decisions
 
+- **Two supporting images**, per the earlier "too vanilla" feedback:
+  `src/assets/img/engagement-room.jpg` (a real photo, in EngagementWorkflow)
+  and `track-record-network.jpg` (an abstract network graphic, in
+  TrackRecord). Both are flat-bordered banners (`border-dark/15`,
+  `object-cover`, no rounded corners) between the section's heading/lede
+  and its content, matching the rest of the design system.
+  Both were generated against an earlier colour spec (pre-card-match) and
+  arrived off-palette — the abstract graphic's background sampled to
+  `#0d1e17` (green, close to the *original* placeholder dark, not the
+  card-matched one) and its gold to a muted `#b8974c`; the photo was full
+  natural colour. Recoloured both programmatically with a luminance-based
+  duotone remap to the exact tokens (`#070C0F` → `#E6AD3D`) rather than
+  asking for regenerated images or eyeballing a CSS filter — this
+  guarantees an exact match, not an approximate one. The photo needed a
+  gamma curve (`t ** 2.0`) biasing the luminance mapping toward the dark
+  end before the duotone lerp; a straight linear duotone flattened it into
+  a uniform yellow-green wash and lost the photographic depth that made it
+  work as a moody, atmospheric room shot in the first place — only genuine
+  highlights (the lamp, the window glow) should reach full brass. The
+  network graphic, being near-binary already (flat background + thin
+  lines), needed no such curve.
 - **Sunburst mark** (`src/components/Sunburst.jsx`) reproduces the mark from
   the printed card as SVG — a quarter-circle arc with 36 radiating lines of
   deterministic-but-irregular length, so it reads as hand-drawn rather than

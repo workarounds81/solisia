@@ -28,15 +28,18 @@ Node 22 or later.
 │   ├── main.jsx
 │   ├── App.jsx                 # Mounts GlobeBackground once, then sections
 │   ├── content/site.js         # ALL copy lives here
+│   ├── assets/img/              # Duotoned to the exact brand tokens — see
+│   │                             # design-brief.md "Decisions" before adding more
 │   ├── components/
 │   │   ├── GlobeBackground.jsx # Fixed, page-level — see "WebGL" below
-│   │   ├── Masthead.jsx        # Sticky wordmark + nav, tone-aware via CSS
+│   │   ├── Masthead.jsx        # Sticky, permanently dark
+│   │   ├── Sunburst.jsx        # The printed card's mark, reproduced as SVG
 │   │   ├── Hero.jsx
 │   │   ├── Services.jsx        # 4 blocks, sticky category filter
 │   │   ├── HostingCallout.jsx  # Full-bleed dark, one paragraph
-│   │   ├── EngagementWorkflow.jsx
-│   │   ├── TrackRecord.jsx     # Anonymised
-│   │   └── Contact.jsx         # Footer + form
+│   │   ├── EngagementWorkflow.jsx  # Includes a banner photo
+│   │   ├── TrackRecord.jsx     # Anonymised; includes a banner graphic
+│   │   └── Contact.jsx         # Footer + form + Sunburst
 │   ├── three/createParticleGlobe.js  # Vanilla three.js, no r3f/GSAP
 │   ├── hooks/useContactForm.js
 │   └── lib/submitContact.js    # Form transport (endpoint or mailto)

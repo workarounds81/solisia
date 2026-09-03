@@ -1,4 +1,5 @@
 import { trackRecord } from '../content/site.js';
+import trackRecordNetwork from '../assets/img/track-record-network.jpg';
 
 /** Anonymised as a matter of course: sector and outcome only, never a client name. */
 export default function TrackRecord() {
@@ -9,6 +10,12 @@ export default function TrackRecord() {
           {trackRecord.heading}
         </h2>
         <p className="mb-11 max-w-[56ch] text-dark/80">{trackRecord.lede}</p>
+
+        <img
+          src={trackRecordNetwork}
+          alt=""
+          className="mb-14 h-64 w-full border border-dark/15 object-cover md:h-80 lg:h-96"
+        />
 
         <div className="mb-14 grid gap-7 md:grid-cols-3 md:gap-10">
           {trackRecord.figures.map((figure) => (
