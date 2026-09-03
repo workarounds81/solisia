@@ -260,6 +260,21 @@ gives no evidence either way for the off-white token.
   now `#070C0F`/`#E6AD3D`. DNS itself is outside this repo's control —
   documented for whoever manages the registrar, not done here.
 
+- **Favicon added, reusing the sunburst mark.** `index.html` previously
+  suppressed the favicon entirely (`href="data:,"`) as part of the original
+  "no logo mark" rule — already superseded once for the Contact footer's
+  sunburst (see that entry above), and now again here. Rather than a new
+  design, `public/favicon.svg` redraws the same mark
+  (`src/components/Sunburst.jsx`) at favicon scale: 11 rays instead of 36
+  and no length jitter, since the jitter that reads as "hand-drawn" at full
+  size just reads as noise at 16-32px; thicker strokes for the same reason.
+  Checked in a real render (Playwright, 16px at 4x device scale — the
+  smallest size a browser tab actually shows) rather than assumed legible.
+  `favicon-32.png` and `apple-touch-icon.png` are rasterised from the same
+  SVG (no `rsvg-convert`/`cairosvg` available in this environment, so via
+  headless Chromium) as fallbacks for browsers that don't support SVG
+  favicons and for iOS home-screen bookmarks.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

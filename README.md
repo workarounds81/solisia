@@ -23,6 +23,9 @@ Node 22 or later.
 ├── public/
 │   ├── .nojekyll               # Stops Pages running Jekyll on the output
 │   ├── CNAME                   # solisia.net — GitHub Pages custom domain
+│   ├── favicon.svg             # Sunburst mark, redrawn at favicon scale
+│   ├── favicon-32.png          # PNG fallback (no SVG favicon support)
+│   ├── apple-touch-icon.png    # iOS home-screen bookmark icon
 │   └── 404.html                # Self-contained not-found page
 ├── src/
 │   ├── index.css               # Tailwind + @theme design tokens
