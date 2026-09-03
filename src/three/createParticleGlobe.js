@@ -114,7 +114,7 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   // this needs to read clearly against both bg-light and bg-dark.
   const material = new THREE.PointsMaterial({
     color: BRASS,
-    size: width < 640 ? 0.05 : 0.04,
+    size: width < 640 ? 0.06 : 0.05,
     sizeAttenuation: true,
     transparent: true,
     opacity: 1,

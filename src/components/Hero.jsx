@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       data-tone="light"
-      className="border-b border-dark/15 bg-light/85 text-dark backdrop-blur-sm"
+      className="border-b border-dark/15 bg-light/50 text-dark"
     >
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-36 md:pb-40">
         <h1 className="reveal max-w-[17ch] text-5xl font-light leading-[1.06] tracking-[-0.02em] md:text-7xl">

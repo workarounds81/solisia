@@ -2,7 +2,7 @@ import { workflow } from '../content/site.js';
 
 export default function EngagementWorkflow() {
   return (
-    <section id="engagement" data-tone="light" className="border-t border-dark/15 bg-light/85 text-dark backdrop-blur-sm">
+    <section id="engagement" data-tone="light" className="border-t border-dark/15 bg-light/50 text-dark">
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
           {workflow.heading}

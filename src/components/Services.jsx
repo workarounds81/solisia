@@ -11,7 +11,7 @@ export default function Services() {
     active === ALL.id ? services.items : services.items.filter((s) => s.category === active);
 
   return (
-    <section id="work" data-tone="light" className="border-t border-dark/15 bg-light/85 text-dark backdrop-blur-sm">
+    <section id="work" data-tone="light" className="border-t border-dark/15 bg-light/50 text-dark">
       {/* Sticky category filter sub-header, flush beneath the masthead */}
       <div className="sticky top-16 z-30 border-b border-dark/15 bg-light/70 backdrop-blur-sm">
         <nav
