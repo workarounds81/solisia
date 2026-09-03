@@ -31,18 +31,34 @@ Defined once in `src/index.css` under `@theme`.
 
 ## WebGL and motion
 
-- **Particle globe** (`src/three/createParticleGlobe.js`, mounted by
-  `ParticleGlobe.jsx` into `#canvas-container` in `Hero.jsx`): a vanilla
-  three.js point cloud, brass-coloured, additive blending. Idle state has a
-  small per-particle sine wobble; scroll through the Hero section lerps every
-  particle from a compact sphere toward a dispersed swarm and rotates/lifts/
-  scales the group. No shaders, no post-processing, no `@react-three/fiber`,
-  no GSAP — kept to what a plain `requestAnimationFrame` loop needs.
+- **World globe** (`src/three/createParticleGlobe.js`, mounted once by
+  `GlobeBackground.jsx` in `App.jsx`, *not* scoped to Hero): a vanilla
+  three.js point cloud sampled onto rough continent outlines (simplified
+  lat/lon polygons — decorative, not cartographically precise), brass
+  particles, normal blending. `position: fixed`, behind all content
+  (`-z-10`), so it's a persistent background that never scrolls away —
+  earlier it was mounted inside Hero's own box and disappeared past that
+  section, which is what prompted this rework. Geometry is static; only the
+  group's rotation changes per frame (slow constant auto-rotate, ~0.055
+  rad/s, plus a light scroll-position nudge), which is why it can run for
+  the whole session without a per-vertex update loop.
+- **Blending note:** first pass used `AdditiveBlending`, which is close to
+  invisible against a light background (white + a mid-brightness tint stays
+  near white) — fine for a dark hero, wrong once the globe had to read
+  against `bg-light` sections too. Switched to `NormalBlending`.
+- **Section backgrounds are translucent + blurred** (`bg-light/85
+  backdrop-blur-sm`, `bg-dark/85` for Hosting) precisely so the fixed globe
+  layer shows through everywhere, not just Hero. This extends the glass
+  language already used on Services sitewide rather than introducing a
+  separate treatment.
 - **Perf guards:** three.js is dynamically imported (its own ~130KB gzip
-  chunk, not in the main bundle), particle count halves under 640px, the
-  render loop stops via `IntersectionObserver` when off-screen and on
-  `visibilitychange`, and `prefers-reduced-motion` renders one static frame
-  with no rAF loop at all.
+  chunk, not in the main bundle), particle count roughly halves under
+  640px, the render loop pauses on `visibilitychange`, and
+  `prefers-reduced-motion` renders one static frame with no rAF loop at
+  all. No `IntersectionObserver` start/stop any more — a fixed-position
+  layer is always "on screen" by definition, so that logic became dead
+  weight and was removed rather than kept for a scroll-scoped mount that no
+  longer exists.
 - **Ambient tone** (`useSectionTone.js` + unlayered CSS in `index.css`): an
   `IntersectionObserver` ranks sections by *absolute visible pixel height*
   (not `intersectionRatio` — that would let a short, fully-visible section

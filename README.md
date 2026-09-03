@@ -26,18 +26,17 @@ Node 22 or later.
 ├── src/
 │   ├── index.css               # Tailwind + @theme design tokens
 │   ├── main.jsx
-│   ├── App.jsx                 # Section order
+│   ├── App.jsx                 # Mounts GlobeBackground once, then sections
 │   ├── content/site.js         # ALL copy lives here
 │   ├── components/
-│   │   ├── Masthead.jsx        # Sticky wordmark + nav
-│   │   ├── Hero.jsx            # Headline + #canvas-container mount
+│   │   ├── GlobeBackground.jsx # Fixed, page-level — see "WebGL" below
+│   │   ├── Masthead.jsx        # Sticky wordmark + nav, tone-aware via CSS
+│   │   ├── Hero.jsx
 │   │   ├── Services.jsx        # 4 blocks, sticky category filter
 │   │   ├── HostingCallout.jsx  # Full-bleed dark, one paragraph
 │   │   ├── EngagementWorkflow.jsx
 │   │   ├── TrackRecord.jsx     # Anonymised
 │   │   └── Contact.jsx         # Footer + form
-│   │   ├── ParticleGlobe.jsx   # Scroll-bound WebGL globe, mounted in Hero
-│   │   └── Masthead.jsx        # (listed above) — tone-aware via CSS
 │   ├── three/createParticleGlobe.js  # Vanilla three.js, no r3f/GSAP
 │   ├── hooks/
 │   │   ├── useContactForm.js

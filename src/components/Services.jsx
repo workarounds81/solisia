@@ -11,9 +11,9 @@ export default function Services() {
     active === ALL.id ? services.items : services.items.filter((s) => s.category === active);
 
   return (
-    <section id="work" data-tone="light" className="border-t border-dark/15 bg-light text-dark">
+    <section id="work" data-tone="light" className="border-t border-dark/15 bg-light/85 text-dark backdrop-blur-sm">
       {/* Sticky category filter sub-header, flush beneath the masthead */}
-      <div className="sticky top-16 z-30 border-b border-dark/15 bg-light/75 backdrop-blur-md">
+      <div className="sticky top-16 z-30 border-b border-dark/15 bg-light/70 backdrop-blur-sm">
         <nav
           aria-label="Filter services"
           className="mx-auto flex max-w-6xl gap-8 overflow-x-auto px-6 py-3"
@@ -49,7 +49,7 @@ export default function Services() {
           {visible.map((service) => (
             <article
               key={service.id}
-              className="grid gap-2 rounded-sm border border-dark/10 bg-light/40 px-6 py-8 backdrop-blur-md transition-colors hover:border-brass/40 md:grid-cols-[15rem_1fr] md:gap-14"
+              className="grid gap-2 rounded-sm border border-dark/10 bg-light/40 px-6 py-8 backdrop-blur-sm transition-colors hover:border-brass/40 md:grid-cols-[15rem_1fr] md:gap-14"
             >
               <div>
                 <p className="mb-2 text-xs uppercase tracking-[0.2em] text-dark/45">

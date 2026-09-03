@@ -1,10 +1,12 @@
 import { hero } from '../content/site.js';
-import ParticleGlobe from './ParticleGlobe.jsx';
 
 export default function Hero() {
   return (
-    <section data-tone="light" className="bg-light text-dark">
-      <div className="mx-auto max-w-6xl px-6 pt-20 pb-14 md:pt-36 md:pb-24">
+    <section
+      data-tone="light"
+      className="border-b border-dark/15 bg-light/85 text-dark backdrop-blur-sm"
+    >
+      <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-36 md:pb-40">
         <h1 className="reveal max-w-[17ch] text-5xl font-light leading-[1.06] tracking-[-0.02em] md:text-7xl">
           {hero.headline} <em className="italic">{hero.headlineEmphasis}</em>
         </h1>
@@ -17,12 +19,6 @@ export default function Hero() {
             </li>
           ))}
         </ul>
-
-        {/* Scroll-bound particle globe, sits below the copy in normal flow —
-            not overlapping it, so there is nothing to click through. */}
-        <div id="canvas-container" className="relative w-full h-[500px]">
-          <ParticleGlobe />
-        </div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { useSectionTone } from './hooks/useSectionTone.js';
+import GlobeBackground from './components/GlobeBackground.jsx';
 import Masthead from './components/Masthead.jsx';
 import Hero from './components/Hero.jsx';
 import Services from './components/Services.jsx';
@@ -12,6 +13,7 @@ export default function App() {
 
   return (
     <>
+      <GlobeBackground />
       <Masthead />
       <main id="top">
         <Hero />
