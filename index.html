@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Solisia</title>
+    <meta name="description" content="Solisia — placeholder description, pending the design brief." />
+
+    <!-- Open Graph / social. Fill in the real URL and image before launch. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Solisia" />
+    <meta property="og:description" content="Solisia — placeholder description, pending the design brief." />
+    <meta property="og:image" content="assets/img/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link visually-hidden" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a href="/" aria-label="Solisia home"><strong>Solisia</strong></a>
+
+        <button
+          class="button button--secondary"
+          type="button"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-nav" data-nav aria-label="Primary">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container container--narrow stack">
+          <h1>Solisia</h1>
+          <p class="hero__lede">
+            Placeholder scaffold. This markup exists so the structure, styles and
+            scripts are wired together and verifiable — it is meant to be
+            replaced by the real landing page.
+          </p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#contact">Primary action</a>
+            <a class="button button--secondary" href="#about">Secondary action</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container container--narrow stack">
+          <h2>About</h2>
+          <p>Section placeholder.</p>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container container--narrow stack">
+          <h2>Contact</h2>
+          <p>Section placeholder.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span data-current-year>2026</span> Solisia. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js" defer></script>
+  </body>
+</html>
