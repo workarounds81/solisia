@@ -234,6 +234,21 @@ gives no evidence either way for the off-white token.
   were never actually reading from `site.js`. Removed the unused export and
   fixed the real tags in `index.html` directly instead.
 
+- **Globe particle colour changed from brass to near-black** (`#E6AD3D` ->
+  `#070C0F`, matching the masthead/`--color-dark` token), per feedback that
+  brass dots were "vaguely visible." Trying the header's own colour instead:
+  contrast against the light sections (most of the page) is now very high —
+  near-black points on off-white. Trade-off, and the reason this is called
+  out here rather than just changed silently: on the dark sections
+  (Masthead, Hosting, the Contact footer strip) the dots are now much
+  closer to their background colour. They stay faintly visible there only
+  because those sections use `bg-dark/80` or `/92`, not a fully opaque
+  fill, so a sliver of the lighter body/globe layer beneath still shows
+  through — verified in a real browser rather than assumed. If that reads
+  as too faint on the dark sections in practice, the fix is a second colour
+  for the material (dark dots on light sections, light/brass dots on dark
+  ones) rather than one colour sitewide.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

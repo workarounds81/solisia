@@ -1,6 +1,12 @@
 import * as THREE from 'three';
 
-const BRASS = 0xe6ad3d;
+// Matches the masthead's near-black (see index.css --color-dark /
+// Masthead.jsx bg-dark) rather than the brand's brass accent — brass read as
+// "vaguely visible" against the light sections. This near-black gives far
+// higher contrast there, at the cost of the dots all but disappearing over
+// the dark sections (Masthead itself, Hosting, Contact) since they're then
+// nearly the same colour as their background.
+const DOT_COLOR = 0x070c0f;
 const RADIUS = 2.3;
 
 /**
@@ -141,7 +147,7 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   // which is why mobile's particle count also goes up here, not down.
   const isMobile = width < 640;
   const material = new THREE.PointsMaterial({
-    color: BRASS,
+    color: DOT_COLOR,
     size: isMobile ? 0.024 : 0.036,
     sizeAttenuation: true,
     transparent: true,
