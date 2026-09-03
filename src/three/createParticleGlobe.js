@@ -114,10 +114,10 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   // this needs to read clearly against both bg-light and bg-dark.
   const material = new THREE.PointsMaterial({
     color: BRASS,
-    size: width < 640 ? 0.06 : 0.05,
+    size: width < 640 ? 0.045 : 0.036,
     sizeAttenuation: true,
     transparent: true,
-    opacity: 1,
+    opacity: 0.65,
     blending: THREE.NormalBlending,
     depthWrite: false,
   });
@@ -127,7 +127,7 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   group.rotation.x = 0.35; // slight axial tilt, like a real globe
   scene.add(group);
 
-  const AUTO_ROTATE_SPEED = 0.055; // rad/sec, slow and steady
+  const AUTO_ROTATE_SPEED = 0.033; // rad/sec — 40% slower than the original 0.055
 
   // Slow camera dolly — the globe periodically drifts closer, then eases
   // back out, on top of the constant rotation. One full in-and-out cycle

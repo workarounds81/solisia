@@ -21,7 +21,7 @@ export default function Contact() {
   const busy = status === 'submitting';
 
   return (
-    <footer id="contact" className="border-t border-dark/15 bg-light/50 text-dark">
+    <footer id="contact" className="border-t border-dark/15 bg-light/80 text-dark">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
         {/* Details */}
         <div>
@@ -73,14 +73,9 @@ export default function Contact() {
       </div>
 
       {/* Legal strip */}
-      <div className="bg-dark/70 text-light/60">
+      <div className="bg-dark/85 text-light/60">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12">
-          <div className="flex flex-wrap items-baseline justify-between gap-8">
-            <span className="font-display text-xl tracking-[0.18em] text-light">{wordmark}</span>
-            <span className="text-sm text-light/70">
-              {footer.entity} &nbsp;·&nbsp; {footer.registration}
-            </span>
-          </div>
+          <span className="font-display text-xl tracking-[0.18em] text-light">{wordmark}</span>
           <p className="max-w-[74ch] border-t border-light/20 pt-6 text-sm leading-[1.7]">
             {footer.legal}
           </p>

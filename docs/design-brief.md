@@ -27,7 +27,9 @@ Defined once in `src/index.css` under `@theme`.
 - **Brass is the only accent**, used sparingly. Never as a fill, never for large text.
 - **Track record stays fully anonymised.** Sector and outcome only. No client names, ever.
 - **Hosting section** is a full-bleed `dark` block containing one paragraph and nothing else.
-- **Contact details:** phone, email, `solisia.net`, `Singapore · Bangkok`.
+- **Contact details:** phone, email, `solisia.net`, location. Location
+  reads `Asia` (changed from the original `Singapore · Bangkok`) — see
+  Decisions.
 
 ## WebGL and motion
 
@@ -39,9 +41,10 @@ Defined once in `src/index.css` under `@theme`.
   (`-z-10`), so it's a persistent background that never scrolls away —
   earlier it was mounted inside Hero's own box and disappeared past that
   section, which is what prompted this rework. Geometry is static; only the
-  group's rotation changes per frame (slow constant auto-rotate, ~0.055
-  rad/s, plus a light scroll-position nudge), which is why it can run for
-  the whole session without a per-vertex update loop.
+  group's rotation changes per frame (slow constant auto-rotate, currently
+  0.033 rad/s — dialled down 40% from an initial 0.055 per feedback that it
+  read too fast — plus a light scroll-position nudge), which is why it can
+  run for the whole session without a per-vertex update loop.
 - **Camera dolly ("swoop"):** `camera.position.z` oscillates on a slow sine
   wave (base 6.4, amplitude ±1.7, 14s full cycle) on top of the rotation —
   the globe periodically drifts closer, then eases back out.
@@ -49,13 +52,18 @@ Defined once in `src/index.css` under `@theme`.
   invisible against a light background (white + a mid-brightness tint stays
   near white) — fine for a dark hero, wrong once the globe had to read
   against `bg-light` sections too. Switched to `NormalBlending`.
-- **Section backgrounds are translucent** (`bg-light/50`, `bg-dark/55` for
-  Hosting) so the fixed globe layer shows through everywhere, not just Hero.
-  No `backdrop-blur` on these full-page washes — blur smears the sparse
-  point cloud into a low-contrast haze rather than dimming it, which is what
-  made the first version of this "barely visible" per direct feedback. Blur
-  stays only on small-scale glass elements: the masthead, the Services
-  filter bar, and the individual service row cards.
+- **Section backgrounds are translucent** (`bg-light/80`, `bg-dark/80` for
+  Hosting) so the fixed globe layer shows through everywhere, not just Hero,
+  while staying restrained rather than a loud centrepiece. No
+  `backdrop-blur` on these full-page washes — blur smears the sparse point
+  cloud into a low-contrast haze rather than dimming it cleanly. Blur stays
+  only on small-scale glass elements: the masthead, the Services filter bar,
+  and the individual service row cards.
+  Tuning history, in case it needs revisiting: an early pass at /85 opacity
+  read as invisible; dropping to /50 (plus bigger, more opaque particles)
+  made it clearly visible but "too obvious and distracting"; current values
+  are the settled middle ground — particle opacity 0.65, size 0.036–0.045,
+  wash opacity /80.
 - **Masthead is permanently dark**, not tone-reactive. An earlier version
   tracked which section was in view and switched the header light/dark to
   match — reported back as the header "flickering" between white and green
@@ -100,6 +108,31 @@ Defined once in `src/index.css` under `@theme`.
 - Extra prototype tones (`slate`, `stone`, `muted`, `brass-soft`, `ink-deep`)
   are not added as tokens; they are expressed as opacities of the three brief
   colours to keep the palette exact.
+- **Positioning moved from Singapore-specific to Asia-wide.** Every mention
+  of "Singapore · Bangkok" as the company's *own* location (Hero meta,
+  Contact "Offices", `<title>`/meta description, the hosting paragraph, the
+  capital-introduction description, the "10 yrs" figure caption) now reads
+  "Asia". Left untouched: the one Track Record case-study line ("Food and
+  beverage establishment, Singapore") — that's a specific anonymised
+  client's location, a historical fact about that engagement, not the
+  company's own branding, so it wasn't in scope for this change.
+- **Hero kicker** ("Investor Relations & Capital Advisory") added above the
+  H1 as a small brass eyebrow, to state the core service line unmistakably
+  up front. Adding it shifted the `.reveal` stagger from 3 elements to 4 —
+  `index.css` now has a `:nth-child(4)` rule so the fade-in sequence still
+  covers all of kicker → headline → lede → meta list.
+- **Footer "Solisia Pte. Ltd. · UEN 202639762M" line removed** from the
+  Contact page's dark strip (was the top-right item next to the wordmark).
+  The required legal disclaimer paragraph below it still names the company
+  where the disclaimer text itself requires it — only the standalone
+  entity/registration line was cut. `footer.entity` and
+  `footer.registration` were removed from `site.js` as dead exports rather
+  than left unused.
+- **`meta.title`/`meta.description` in `site.js` were dead code** — the
+  real `<title>` and `<meta name="description">` live directly in
+  `index.html` (this is a plain static SPA, no head-management library) and
+  were never actually reading from `site.js`. Removed the unused export and
+  fixed the real tags in `index.html` directly instead.
 
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`

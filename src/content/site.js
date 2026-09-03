@@ -3,12 +3,6 @@
  * read from this file and contain no prose of their own.
  */
 
-export const meta = {
-  title: 'Solisia — Investor relations and capital advisory, Singapore',
-  description:
-    'Solisia is a Singapore investor relations and capital advisory firm working with founders and funds across Southeast Asia.',
-};
-
 export const wordmark = 'SOLISIA';
 
 export const nav = [
@@ -19,11 +13,12 @@ export const nav = [
 ];
 
 export const hero = {
+  kicker: 'Investor Relations & Capital Advisory',
   headline: 'Capital moves after the meeting,',
   headlineEmphasis: 'not before it.',
   lede:
-    'Solisia is an investor relations and capital advisory firm in Singapore. We work with founders and fund managers across Southeast Asia on how they are positioned, who they meet, and what happens in the eighteen months after the cheque clears.',
-  meta: ['Singapore', 'Bangkok', 'Founded 2026'],
+    'Solisia is an investor relations and capital advisory firm in Asia. We work with founders and fund managers across Southeast Asia on how they are positioned, who they meet, and what happens in the eighteen months after the cheque clears.',
+  meta: ['Asia', 'Founded 2026'],
 };
 
 /**
@@ -52,7 +47,7 @@ export const services = {
       category: 'introduce',
       title: 'Capital introduction',
       description:
-        'Targeted introductions to family offices, funds and private investors across Singapore, Bangkok and the wider region — screened for mandate and ticket size before anyone’s time is spent.',
+        'Targeted introductions to family offices, funds and private investors across Asia — screened for mandate and ticket size before anyone’s time is spent.',
     },
     {
       id: 'positioning',
@@ -78,7 +73,7 @@ export const services = {
  */
 export const hosting = {
   paragraph:
-    'We host private dinners and small gatherings for investors in Singapore and Bangkok, drawn from our own network of venues and rooms. They are not events. There is no deck, no lectern, no name badges. Six to fourteen people who ought to know each other, in a room where the conversation can be unguarded. More of our clients’ relationships have started at those tables than in any meeting room, which is why we treat hosting as a discipline rather than a courtesy.',
+    'We host private dinners and small gatherings for investors across Asia, drawn from our own network of venues and rooms. They are not events. There is no deck, no lectern, no name badges. Six to fourteen people who ought to know each other, in a room where the conversation can be unguarded. More of our clients’ relationships have started at those tables than in any meeting room, which is why we treat hosting as a discipline rather than a courtesy.',
 };
 
 export const workflow = {
@@ -111,7 +106,7 @@ export const trackRecord = {
   figures: [
     { value: 'US$9M+', label: 'Raised across token, equity and asset-backed structures' },
     { value: 'SAFT, Series A, asset-backed', label: 'Structures raised across', isText: true },
-    { value: '10 yrs', label: 'Operating between Singapore and Bangkok' },
+    { value: '10 yrs', label: 'Operating across Asia' },
   ],
   items: [
     {
@@ -147,12 +142,10 @@ export const contact = {
   phone: '+65 9857 5090',
   phoneHref: '+6598575090',
   website: 'solisia.net',
-  locations: 'Singapore · Bangkok',
+  locations: 'Asia',
 };
 
 export const footer = {
-  entity: 'Solisia Pte. Ltd.',
-  registration: 'UEN 202639762M',
   legal:
     'Solisia Pte. Ltd. provides investor relations, communications and commercial advisory services. Nothing on this website is an offer to sell, or a solicitation of an offer to buy, any security or investment product, nor does it constitute investment, legal or tax advice. Solisia does not manage client assets, hold client monies, or provide any service requiring a capital markets services licence. Any investments referred to are made on the company’s own account. © 2026 Solisia Pte. Ltd.',
 };

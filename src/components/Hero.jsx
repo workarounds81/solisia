@@ -2,10 +2,9 @@ import { hero } from '../content/site.js';
 
 export default function Hero() {
   return (
-    <section
-      className="border-b border-dark/15 bg-light/50 text-dark"
-    >
+    <section className="border-b border-dark/15 bg-light/80 text-dark">
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-36 md:pb-40">
+        <p className="reveal mb-6 text-xs uppercase tracking-[0.25em] text-brass">{hero.kicker}</p>
         <h1 className="reveal max-w-[17ch] text-5xl font-light leading-[1.06] tracking-[-0.02em] md:text-7xl">
           {hero.headline} <em className="italic">{hero.headlineEmphasis}</em>
         </h1>
