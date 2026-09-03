@@ -2,18 +2,18 @@ import { workflow } from '../content/site.js';
 
 export default function EngagementWorkflow() {
   return (
-    <section id="workflow" className="bg-light text-dark">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <h2 className="text-4xl md:text-5xl">{workflow.heading}</h2>
+    <section id="engagement" data-tone="light" className="border-t border-dark/15 bg-light text-dark">
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
+          {workflow.heading}
+        </h2>
 
-        <ol className="mt-16 grid gap-x-12 gap-y-14 md:grid-cols-2">
-          {workflow.steps.map((step, index) => (
-            <li key={step.title} className="border-t border-dark/15 pt-6">
-              <p className="text-xs tracking-[0.2em] text-brass">
-                {String(index + 1).padStart(2, '0')}
-              </p>
-              <h3 className="mt-4 text-2xl md:text-3xl">{step.title}</h3>
-              <p className="mt-4 max-w-md leading-relaxed text-dark/70">{step.description}</p>
+        <ol className="grid gap-8 md:grid-cols-3 md:gap-10">
+          {workflow.steps.map((step) => (
+            <li key={step.title} className="border-t-2 border-brass pt-4">
+              <p className="mb-2 text-xs tracking-wide text-brass">{step.label}</p>
+              <h3 className="text-xl leading-snug">{step.title}</h3>
+              <p className="mt-2 text-[0.97rem] text-dark/80">{step.description}</p>
             </li>
           ))}
         </ol>

@@ -7,15 +7,16 @@ export default function Services() {
   const [active, setActive] = useState(ALL.id);
   const filters = [ALL, ...serviceCategories];
   const labelFor = (id) => serviceCategories.find((c) => c.id === id)?.label ?? '';
-  const visible = active === ALL.id ? services : services.filter((s) => s.category === active);
+  const visible =
+    active === ALL.id ? services.items : services.items.filter((s) => s.category === active);
 
   return (
-    <section id="services" className="bg-light text-dark">
-      {/* Sticky category filter sub-header */}
-      <div className="sticky top-0 z-10 border-b border-dark/10 bg-light">
+    <section id="work" data-tone="light" className="border-t border-dark/15 bg-light text-dark">
+      {/* Sticky category filter sub-header, flush beneath the masthead */}
+      <div className="sticky top-16 z-30 border-b border-dark/15 bg-light/75 backdrop-blur-md">
         <nav
           aria-label="Filter services"
-          className="mx-auto flex max-w-6xl gap-8 overflow-x-auto px-6 py-4"
+          className="mx-auto flex max-w-6xl gap-8 overflow-x-auto px-6 py-3"
         >
           {filters.map((filter) => {
             const isActive = filter.id === active;
@@ -36,16 +37,30 @@ export default function Services() {
         </nav>
       </div>
 
-      <div className="mx-auto grid max-w-6xl gap-x-12 gap-y-20 px-6 py-24 md:grid-cols-2 md:py-32">
-        {visible.map((service) => (
-          <article key={service.id}>
-            <p className="text-xs uppercase tracking-[0.2em] text-brass">
-              {labelFor(service.category)}
-            </p>
-            <h3 className="mt-4 text-3xl md:text-4xl">{service.title}</h3>
-            <p className="mt-5 max-w-md leading-relaxed text-dark/70">{service.description}</p>
-          </article>
-        ))}
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
+          {services.heading}
+        </h2>
+        <p className="mb-11 max-w-[56ch] text-dark/80">{services.lede}</p>
+
+        {/* Restrained glass panels: still row-shaped per the prototype, now
+            with a soft frosted surface rather than a flat divider list. */}
+        <div className="space-y-4">
+          {visible.map((service) => (
+            <article
+              key={service.id}
+              className="grid gap-2 rounded-sm border border-dark/10 bg-light/40 px-6 py-8 backdrop-blur-md transition-colors hover:border-brass/40 md:grid-cols-[15rem_1fr] md:gap-14"
+            >
+              <div>
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-dark/45">
+                  {labelFor(service.category)}
+                </p>
+                <h3 className="text-2xl leading-[1.25]">{service.title}</h3>
+              </div>
+              <p className="max-w-[58ch] text-dark/80">{service.description}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

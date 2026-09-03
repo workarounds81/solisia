@@ -1,9 +1,18 @@
-import { contact } from '../content/site.js';
+import { contact, footer, wordmark } from '../content/site.js';
 import { useContactForm } from '../hooks/useContactForm.js';
 import { submitContact } from '../lib/submitContact.js';
 
 const field =
   'w-full border-b border-dark/25 bg-transparent py-3 text-dark placeholder:text-dark/35 focus:border-dark focus:outline-none';
+const label = 'text-xs uppercase tracking-[0.2em] text-dark/60';
+const link = 'border-b border-brass pb-px transition-colors hover:text-brass';
+
+const rows = [
+  ['Email', <a key="email" href={`mailto:${contact.email}`} className={link}>{contact.email}</a>],
+  ['Phone', <a key="phone" href={`tel:${contact.phoneHref}`} className={link}>{contact.phone}</a>],
+  ['Website', <a key="web" href={`https://${contact.website}`} className={link}>{contact.website}</a>],
+  ['Offices', contact.locations],
+];
 
 export default function Contact() {
   const { values, status, error, handleChange, handleSubmit } = useContactForm({
@@ -12,73 +21,39 @@ export default function Contact() {
   const busy = status === 'submitting';
 
   return (
-    <footer id="contact" className="bg-light text-dark">
-      <div className="mx-auto grid max-w-6xl gap-16 px-6 py-24 md:grid-cols-2 md:py-32">
+    <footer id="contact" data-tone="light" className="border-t border-dark/15 bg-light text-dark">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
         {/* Details */}
         <div>
-          <h2 className="text-4xl md:text-5xl">{contact.heading}</h2>
-          <address className="mt-10 space-y-3 not-italic leading-relaxed">
-            <p>
-              <a href={`tel:${contact.phone.replace(/\s+/g, '')}`} className="hover:text-brass">
-                {contact.phone}
-              </a>
-            </p>
-            <p>
-              <a href={`mailto:${contact.email}`} className="hover:text-brass">
-                {contact.email}
-              </a>
-            </p>
-            <p>
-              <a href={`https://${contact.website}`} className="hover:text-brass">
-                {contact.website}
-              </a>
-            </p>
-            <p className="text-dark/60">{contact.locations}</p>
-          </address>
+          <h2 className="max-w-[15ch] text-3xl font-light leading-[1.14] tracking-[-0.015em] md:text-4xl">
+            {contact.heading}
+          </h2>
+          <dl className="mt-10 border-t border-dark/15">
+            {rows.map(([term, value]) => (
+              <div
+                key={term}
+                className="flex flex-wrap justify-between gap-6 border-b border-dark/15 py-4"
+              >
+                <dt className="text-sm text-dark/60">{term}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} noValidate className="space-y-8">
           <div>
-            <label htmlFor="name" className="text-xs uppercase tracking-[0.2em] text-dark/60">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              autoComplete="name"
-              value={values.name}
-              onChange={handleChange}
-              className={field}
-            />
+            <label htmlFor="name" className={label}>Name</label>
+            <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={handleChange} className={field} />
           </div>
           <div>
-            <label htmlFor="email" className="text-xs uppercase tracking-[0.2em] text-dark/60">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              value={values.email}
-              onChange={handleChange}
-              className={field}
-            />
+            <label htmlFor="email" className={label}>Email</label>
+            <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={handleChange} className={field} />
           </div>
           <div>
-            <label htmlFor="message" className="text-xs uppercase tracking-[0.2em] text-dark/60">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              value={values.message}
-              onChange={handleChange}
-              className={`${field} resize-y`}
-            />
+            <label htmlFor="message" className={label}>Message</label>
+            <textarea id="message" name="message" rows={4} value={values.message} onChange={handleChange} className={`${field} resize-y`} />
           </div>
 
           <div className="flex items-center gap-6">
@@ -97,12 +72,18 @@ export default function Contact() {
         </form>
       </div>
 
-      <div className="border-t border-dark/10">
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-4 px-6 py-6 text-xs text-dark/50">
-          <p>
-            &copy; {new Date().getFullYear()} {contact.legal}
+      {/* Legal strip */}
+      <div className="bg-dark text-light/60">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12">
+          <div className="flex flex-wrap items-baseline justify-between gap-8">
+            <span className="font-display text-xl tracking-[0.18em] text-light">{wordmark}</span>
+            <span className="text-sm text-light/70">
+              {footer.entity} &nbsp;·&nbsp; {footer.registration}
+            </span>
+          </div>
+          <p className="max-w-[74ch] border-t border-light/20 pt-6 text-sm leading-[1.7]">
+            {footer.legal}
           </p>
-          <p>{contact.locations}</p>
         </div>
       </div>
     </footer>

@@ -29,13 +29,19 @@ Node 22 or later.
 │   ├── App.jsx                 # Section order
 │   ├── content/site.js         # ALL copy lives here
 │   ├── components/
+│   │   ├── Masthead.jsx        # Sticky wordmark + nav
 │   │   ├── Hero.jsx            # Headline + #canvas-container mount
 │   │   ├── Services.jsx        # 4 blocks, sticky category filter
 │   │   ├── HostingCallout.jsx  # Full-bleed dark, one paragraph
 │   │   ├── EngagementWorkflow.jsx
 │   │   ├── TrackRecord.jsx     # Anonymised
 │   │   └── Contact.jsx         # Footer + form
-│   ├── hooks/useContactForm.js
+│   │   ├── ParticleGlobe.jsx   # Scroll-bound WebGL globe, mounted in Hero
+│   │   └── Masthead.jsx        # (listed above) — tone-aware via CSS
+│   ├── three/createParticleGlobe.js  # Vanilla three.js, no r3f/GSAP
+│   ├── hooks/
+│   │   ├── useContactForm.js
+│   │   └── useSectionTone.js   # Drives the ambient masthead tone shift
 │   └── lib/submitContact.js    # Form transport (endpoint or mailto)
 └── docs/design-brief.md        # Design constraints — read before changing styles
 ```
@@ -51,15 +57,22 @@ Node 22 or later.
 
 ## Deployment
 
-Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site
-and force-pushes `dist/` to the `gh-pages` branch. GitHub Pages serves that
-branch (*Settings → Pages → Source: Deploy from a branch → `gh-pages` / root*).
+`.github/workflows/deploy.yml` builds and publishes to the `gh-pages` branch
+on every push — GitHub Pages serves that branch (*Settings → Pages → Source:
+Deploy from a branch → `gh-pages` / root*). Two independent targets live side
+by side on it, chosen by which branch triggered the run:
 
-Live URL: <https://workarounds81.github.io/solisia/>
+| Push to | Vite `base` | Published to | Served at |
+| --- | --- | --- | --- |
+| `main` | `/solisia/` | `gh-pages:/` (root) | <https://workarounds81.github.io/solisia/> |
+| `claude/solisia-landing-setup-sztnel` | `/solisia/preview/` | `gh-pages:/preview/` | <https://workarounds81.github.io/solisia/preview/> |
 
-This is a *project* site served from the `/solisia/` subpath, which is why
-`vite.config.js` sets `base: '/solisia/'`. If a custom apex domain is added,
-change that to `'/'` and the `href` in `public/404.html`.
+The publish step checks out the existing `gh-pages` branch and replaces only
+its own target directory, so a preview push never touches the production
+files and vice versa — there's always a live preview to review before
+promoting anything to `main`. This is a *project* site served from a
+subpath, which is why the base path has to match at build time; if a custom
+apex domain is added later, both go away and `base` becomes `'/'`.
 
 The workflow deliberately avoids the `github-pages` environment and the
 `deploy-pages` action; it only needs `contents: write` to push a branch.

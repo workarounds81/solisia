@@ -20,22 +20,96 @@
 
   body {
     @apply bg-light font-body text-dark antialiased;
+    font-feature-settings: 'kern' 1;
   }
 
+  /* Weight is set per component: 300 for hero/hosting/contact, 400 elsewhere. */
   h1,
   h2,
   h3 {
-    @apply font-display font-light;
+    @apply font-display;
     text-wrap: balance;
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brass;
+    @apply rounded-xs outline-2 outline-offset-2 outline-brass;
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
+  }
+}
+
+/* One page-load reveal, hero only. Siblings stagger by source order. */
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: rise 0.9s cubic-bezier(0.22, 0.7, 0.3, 1) forwards;
+  }
+  .reveal:nth-child(2) {
+    animation-delay: 0.13s;
+  }
+  .reveal:nth-child(3) {
+    animation-delay: 0.24s;
+  }
+  @keyframes rise {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------------
+   Ambient tone — the sticky masthead is the one element always on screen,
+   so it is what carries the "background shifts as sections cross the scroll
+   threshold" effect. useSectionTone() (src/hooks) stamps html[data-tone];
+   solid-color opacity only, no gradients, per the brief.
+
+   Deliberately unlayered (outside @layer): Tailwind v4's own utility classes
+   — e.g. the nav links' text-dark/60 — live in its "utilities" layer, which
+   always outranks "components" regardless of selector specificity. Unlayered
+   rules outrank every layer, which is the only way these overrides reliably
+   beat the utility classes already on those elements.
+   ------------------------------------------------------------------------ */
+header {
+  transition:
+    background-color 500ms ease,
+    border-color 500ms ease;
+}
+header a,
+header nav a {
+  transition: color 500ms ease;
+}
+
+html[data-tone='dark'] header {
+  background-color: color-mix(in srgb, var(--color-dark) 88%, transparent);
+  border-color: color-mix(in srgb, var(--color-light) 15%, transparent);
+}
+html[data-tone='dark'] header a {
+  color: var(--color-light);
+}
+html[data-tone='dark'] header nav a {
+  color: color-mix(in srgb, var(--color-light) 65%, transparent);
+}
+html[data-tone='dark'] header nav a:hover {
+  color: var(--color-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header,
+  header a,
+  header nav a {
+    transition: none;
   }
 }

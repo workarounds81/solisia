@@ -2,7 +2,7 @@ name: Build and publish
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/solisia-landing-setup-sztnel]
   workflow_dispatch:
 
 # Only needs to push the built site to the gh-pages branch. Deliberately does
@@ -11,9 +11,12 @@ on:
 permissions:
   contents: write
 
+# One concurrency group per branch: a push to main and a push to the dev
+# branch publish to different targets (root vs. /preview/) and must not
+# cancel each other, but repeated pushes to the *same* branch should queue.
 concurrency:
-  group: gh-pages
-  cancel-in-progress: true
+  group: gh-pages-${{ github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
   build-publish:
@@ -31,17 +34,65 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      # main -> production, served at the site root.
+      # anything else -> preview, served at /preview/ so it never touches
+      # the production build. Vite's `base` has to match at build time so
+      # the built asset URLs resolve under the right subpath.
+      - name: Determine publish target
+        id: target
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "base=/solisia/" >> "$GITHUB_OUTPUT"
+            echo "subdir=" >> "$GITHUB_OUTPUT"
+            echo "label=production" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=/solisia/preview/" >> "$GITHUB_OUTPUT"
+            echo "subdir=preview" >> "$GITHUB_OUTPUT"
+            echo "label=preview" >> "$GITHUB_OUTPUT"
+          fi
 
-      - name: Publish dist to gh-pages
+      - name: Build
+        run: npx vite build --base="${{ steps.target.outputs.base }}"
+
+      - name: Publish to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SUBDIR: ${{ steps.target.outputs.subdir }}
+          LABEL: ${{ steps.target.outputs.label }}
         run: |
-          cd dist
-          git init -q -b gh-pages
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          set -e
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          REMOTE="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          # Check out the existing gh-pages branch so publishing one target
+          # (root or /preview/) never deletes the other. Falls back to an
+          # empty branch on the very first run.
+          rm -rf /tmp/gh-pages
+          if git clone --branch gh-pages --single-branch --depth 1 "$REMOTE" /tmp/gh-pages 2>/dev/null; then
+            :
+          else
+            mkdir -p /tmp/gh-pages
+            git -C /tmp/gh-pages init -q -b gh-pages
+          fi
+
+          if [ -n "$SUBDIR" ]; then
+            TARGET="/tmp/gh-pages/$SUBDIR"
+            rm -rf "$TARGET"
+          else
+            TARGET="/tmp/gh-pages"
+            # Publishing to root: clear everything except the preview subtree.
+            find "$TARGET" -mindepth 1 -maxdepth 1 ! -name "$SUBDIR" ! -name preview ! -name .git -exec rm -rf {} +
+          fi
+          mkdir -p "$TARGET"
+          cp -r dist/. "$TARGET/"
+
+          cd /tmp/gh-pages
           git add -A
-          git commit -q -m "Publish ${GITHUB_SHA::7}"
-          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          if git diff --cached --quiet; then
+            echo "No changes to publish for $LABEL."
+          else
+            git commit -q -m "Publish $LABEL: ${GITHUB_SHA::7}"
+            git push "$REMOTE" gh-pages
+          fi

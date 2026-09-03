@@ -1,21 +1,41 @@
 import { trackRecord } from '../content/site.js';
 
-/** Anonymised by agreement: sector and outcome only, never a client name. */
+/** Anonymised as a matter of course: sector and outcome only, never a client name. */
 export default function TrackRecord() {
   return (
-    <section id="track-record" className="bg-light text-dark">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <h2 className="text-4xl md:text-5xl">{trackRecord.heading}</h2>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-dark/50">{trackRecord.note}</p>
+    <section id="record" data-tone="light" className="border-t border-dark/15 bg-light text-dark">
+      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
+          {trackRecord.heading}
+        </h2>
+        <p className="mb-11 max-w-[56ch] text-dark/80">{trackRecord.lede}</p>
 
-        <ul className="mt-16 divide-y divide-dark/15 border-y border-dark/15">
-          {trackRecord.items.map((item) => (
-            <li key={item.sector} className="grid gap-3 py-8 md:grid-cols-[16rem_1fr] md:gap-12">
-              <p className="text-sm tracking-wide text-dark/60">{item.sector}</p>
-              <p className="leading-relaxed">{item.outcome}</p>
-            </li>
+        <div className="mb-14 grid gap-7 md:grid-cols-3 md:gap-10">
+          {trackRecord.figures.map((figure) => (
+            <div key={figure.label}>
+              <p
+                className={`font-display font-light tracking-[-0.02em] ${
+                  figure.isText ? 'text-2xl leading-[1.3]' : 'text-5xl leading-none'
+                }`}
+              >
+                {figure.value}
+              </p>
+              <p className="mt-2 max-w-[22ch] text-sm text-dark/60">{figure.label}</p>
+            </div>
           ))}
-        </ul>
+        </div>
+
+        <dl className="border-t border-dark/15">
+          {trackRecord.items.map((item) => (
+            <div
+              key={item.sector}
+              className="grid gap-1 border-b border-dark/15 py-6 md:grid-cols-[1fr_1.15fr] md:gap-14"
+            >
+              <dt className="font-display text-lg">{item.sector}</dt>
+              <dd className="text-[0.95rem] text-dark/60">{item.outcome}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

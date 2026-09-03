@@ -1,115 +1,158 @@
 /**
- * All site copy lives here. Components read from this file and contain no
- * prose of their own, so swapping in final content is a one-file edit.
- *
- * PLACEHOLDER COPY: the design prototype was not reachable when this was
- * scaffolded. Everything below is structural stand-in text shaped to the
- * brief; replace it with the prototype's real wording.
+ * All site copy lives here, extracted from the design prototype. Components
+ * read from this file and contain no prose of their own.
  */
 
-export const hero = {
-  wordmark: 'Solisia',
-  headline: 'Considered infrastructure for organisations that would rather not think about it.',
-  lede:
-    'We design, build and quietly run the systems behind businesses across Southeast Asia. Fewer moving parts. Nothing you have to babysit.',
+export const meta = {
+  title: 'Solisia — Investor relations and capital advisory, Singapore',
+  description:
+    'Solisia is a Singapore investor relations and capital advisory firm working with founders and funds across Southeast Asia.',
 };
 
+export const wordmark = 'SOLISIA';
+
+export const nav = [
+  { href: '#work', label: 'What we do' },
+  { href: '#engagement', label: 'Engagement' },
+  { href: '#record', label: 'Track record' },
+  { href: '#contact', label: 'Contact' },
+];
+
+export const hero = {
+  headline: 'Capital moves after the meeting,',
+  headlineEmphasis: 'not before it.',
+  lede:
+    'Solisia is an investor relations and capital advisory firm in Singapore. We work with founders and fund managers across Southeast Asia on how they are positioned, who they meet, and what happens in the eighteen months after the cheque clears.',
+  meta: ['Singapore', 'Bangkok', 'Founded 2026'],
+};
+
+/**
+ * Filter categories reuse the engagement sequence's own vocabulary
+ * (Position → Introduce → Sustain) rather than inventing new terms.
+ */
 export const serviceCategories = [
-  { id: 'advisory', label: 'Advisory' },
-  { id: 'build', label: 'Build' },
-  { id: 'operate', label: 'Operate' },
+  { id: 'position', label: 'Position' },
+  { id: 'introduce', label: 'Introduce' },
+  { id: 'sustain', label: 'Sustain' },
 ];
 
-export const services = [
-  {
-    id: 'architecture',
-    category: 'advisory',
-    title: 'Architecture & review',
-    description:
-      'An honest look at what you have, what it costs, and what should change. Written down plainly, with a sequence you can act on.',
-  },
-  {
-    id: 'platform',
-    category: 'build',
-    title: 'Platform engineering',
-    description:
-      'Foundations built to be boring: predictable deployments, sensible defaults, and documentation your next hire can actually use.',
-  },
-  {
-    id: 'integration',
-    category: 'build',
-    title: 'Systems integration',
-    description:
-      'Connecting the tools you already pay for so data moves without someone re-typing it. Fewer spreadsheets, fewer surprises.',
-  },
-  {
-    id: 'managed',
-    category: 'operate',
-    title: 'Managed operations',
-    description:
-      'We keep it running. Monitoring, patching, backups and the 3am call — handled, and reported in a monthly note you can read in two minutes.',
-  },
-];
+export const services = {
+  heading: 'Four things, done properly',
+  lede: 'We are not a placement agent and we are not a marketing shop. We sit between the two, and we stay after the raise closes.',
+  items: [
+    {
+      id: 'investor-relations',
+      category: 'sustain',
+      title: 'Investor relations',
+      description:
+        'Reporting cadence, quarterly updates, the awkward conversations, and the register kept warm between rounds. Most founders build this function late and badly. It is the part we care about most.',
+    },
+    {
+      id: 'capital-introduction',
+      category: 'introduce',
+      title: 'Capital introduction',
+      description:
+        'Targeted introductions to family offices, funds and private investors across Singapore, Bangkok and the wider region — screened for mandate and ticket size before anyone’s time is spent.',
+    },
+    {
+      id: 'positioning',
+      category: 'position',
+      title: 'Positioning and materials',
+      description:
+        'Narrative, deck, one-pager, FAQ, diligence questionnaire, data room. Written to survive scrutiny rather than to win a first meeting.',
+    },
+    {
+      id: 'advisory',
+      category: 'position',
+      title: 'Advisory',
+      description:
+        'Commercial structuring of the offer itself: terms, economics, how the product is put in front of the market. We occasionally take small positions on our own account in deals we advise.',
+    },
+  ],
+};
 
+/**
+ * The brief mandates a single paragraph with no decoration here. The
+ * prototype's three paragraphs are joined verbatim; its heading ("Some rooms
+ * are worth the table.") and brass rule are omitted to honour the constraint.
+ */
 export const hosting = {
   paragraph:
-    'We host what we build. Not because it is cheaper for you — though it usually is — but because there is nobody else to phone when something breaks, and we would rather that be us.',
+    'We host private dinners and small gatherings for investors in Singapore and Bangkok, drawn from our own network of venues and rooms. They are not events. There is no deck, no lectern, no name badges. Six to fourteen people who ought to know each other, in a room where the conversation can be unguarded. More of our clients’ relationships have started at those tables than in any meeting room, which is why we treat hosting as a discipline rather than a courtesy.',
 };
 
 export const workflow = {
   heading: 'How an engagement runs',
   steps: [
     {
-      title: 'A conversation',
+      label: 'First',
+      title: 'Position',
       description:
-        'Forty minutes, no deck. We ask what is slow, what is fragile, and what you have stopped noticing because it has always been that way.',
+        'We take the business apart and rebuild how it is described. Materials, structure, the answer to the question every investor will ask third.',
     },
     {
-      title: 'A short written proposal',
+      label: 'Then',
+      title: 'Introduce',
       description:
-        'Scope, sequence, price. Usually two pages. If it needs more than that, we have not understood the problem yet.',
+        'Target list built by mandate, not by volume. Outreach, meetings arranged and attended, objections logged and fed back into the story.',
     },
     {
-      title: 'The work',
+      label: 'After',
+      title: 'Sustain',
       description:
-        'Delivered in small, reviewable pieces, with a short note each week on what changed and what is next.',
-    },
-    {
-      title: 'Handover, or not',
-      description:
-        'Everything documented so you can take it in-house. Most clients ask us to keep running it instead. Either is fine.',
+        'Reporting, updates, the register managed. The work that decides whether the next round is a conversation or a cold start.',
     },
   ],
 };
 
 export const trackRecord = {
   heading: 'Track record',
-  note: 'Client names are withheld by agreement. Each engagement is described by sector and outcome only.',
+  lede: 'Solisia was incorporated in 2026. The experience behind it belongs to its principals, built over a decade of raises across Southeast Asia and beyond. Client names are withheld as a matter of course.',
+  figures: [
+    { value: 'US$9M+', label: 'Raised across token, equity and asset-backed structures' },
+    { value: 'SAFT, Series A, asset-backed', label: 'Structures raised across', isText: true },
+    { value: '10 yrs', label: 'Operating between Singapore and Bangkok' },
+  ],
   items: [
     {
-      sector: 'Regional logistics group',
-      outcome: 'Consolidated four booking systems into one, cutting manual reconciliation from three days a month to none.',
+      sector: 'Cross-border payments infrastructure group',
+      outcome: 'Investor relations and capital raising support through an institutional round.',
     },
     {
-      sector: 'Private healthcare provider',
-      outcome: 'Replaced a failing on-premise setup with managed infrastructure; zero unplanned downtime in the following eighteen months.',
+      sector: 'Blockchain financial infrastructure company',
+      outcome: 'Token sale positioning, investor outreach and ongoing holder communications.',
     },
     {
-      sector: 'Specialist manufacturer',
-      outcome: 'Integrated production, inventory and finance so a single order flows end to end without re-entry.',
+      sector: 'Asset-backed issuance platform',
+      outcome: 'Structuring input, investor materials and introductions to regional private capital.',
     },
     {
-      sector: 'Professional services firm',
-      outcome: 'Migrated and now operate a document platform for roughly two hundred staff across two countries.',
+      sector: 'Early-stage venture firm, Southeast Asia',
+      outcome: 'Deal sourcing and investor relations across the portfolio.',
+    },
+    {
+      sector: 'Commodities trading venture',
+      outcome: 'US$2M raised. Investor introductions, materials and diligence support.',
+    },
+    {
+      sector: 'Food and beverage establishment, Singapore',
+      outcome: 'US$500K raised from private investors.',
     },
   ],
 };
 
 export const contact = {
-  heading: 'Get in touch',
-  phone: '+65 0000 0000', // PLACEHOLDER
-  email: 'hello@solisia.net', // PLACEHOLDER
+  heading: 'If you are raising, start early.',
+  email: 'rey@solisia.net',
+  phone: '+65 9857 5090',
+  phoneHref: '+6598575090',
   website: 'solisia.net',
   locations: 'Singapore · Bangkok',
-  legal: 'Solisia',
+};
+
+export const footer = {
+  entity: 'Solisia Pte. Ltd.',
+  registration: 'UEN 202639762M',
+  legal:
+    'Solisia Pte. Ltd. provides investor relations, communications and commercial advisory services. Nothing on this website is an offer to sell, or a solicitation of an offer to buy, any security or investment product, nor does it constitute investment, legal or tax advice. Solisia does not manage client assets, hold client monies, or provide any service requiring a capital markets services licence. Any investments referred to are made on the company’s own account. © 2026 Solisia Pte. Ltd.',
 };
