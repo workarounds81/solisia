@@ -18,7 +18,7 @@ export const hero = {
   headlineEmphasis: 'not before it.',
   lede:
     'Solisia is an investor relations and capital advisory firm in Asia. We work with founders and fund managers across Southeast Asia on how they are positioned, who they meet, and what happens in the eighteen months after the cheque clears.',
-  meta: ['Asia', 'Founded 2026'],
+  meta: ['Asia'],
 };
 
 /**
