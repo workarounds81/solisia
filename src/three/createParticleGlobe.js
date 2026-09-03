@@ -117,7 +117,7 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
     size: width < 640 ? 0.045 : 0.036,
     sizeAttenuation: true,
     transparent: true,
-    opacity: 0.65,
+    opacity: 0.75, // +15% from 0.65, per feedback to make it a little more obvious
     blending: THREE.NormalBlending,
     depthWrite: false,
   });
