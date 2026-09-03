@@ -33,7 +33,10 @@ gives no evidence either way for the off-white token.
 
 ## Non-negotiable constraints
 
-- **Restraint is the positioning.** No logo mark, no background patterns, no gradients.
+- **Restraint is the positioning.** No background patterns, no gradients.
+  The "no logo mark" half of this rule was explicitly relaxed once printed
+  cards existed with a sunburst mark on them (see Decisions) — one small
+  instance of it now exists, deliberately not a repeating motif.
 - **Brass is the only accent**, used sparingly. Never as a fill, never for large text.
 - **Track record stays fully anonymised.** Sector and outcome only. No client names, ever.
 - **Hosting section** is a full-bleed `dark` block containing one paragraph and nothing else.
@@ -102,6 +105,15 @@ gives no evidence either way for the off-white token.
 
 ## Decisions
 
+- **Sunburst mark** (`src/components/Sunburst.jsx`) reproduces the mark from
+  the printed card as SVG — a quarter-circle arc with 36 radiating lines of
+  deterministic-but-irregular length, so it reads as hand-drawn rather than
+  a mechanical starburst. Placed once, in the Contact footer's dark strip,
+  bottom-right corner, at 50% brass opacity — restrained per explicit user
+  choice among three options (add it restrained / stay typographic / show a
+  mockup first). Deliberately not placed in Hosting, which keeps its own
+  separate "one paragraph, no decoration" rule untouched — that constraint
+  wasn't part of what was being reconsidered.
 - **Hosting section vs. prototype.** The prototype had a heading ("Some rooms
   are worth the table."), a brass rule and three paragraphs. The brief mandates
   one paragraph, no decoration. The three paragraphs are joined verbatim into

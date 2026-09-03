@@ -1,6 +1,7 @@
 import { contact, footer, wordmark } from '../content/site.js';
 import { useContactForm } from '../hooks/useContactForm.js';
 import { submitContact } from '../lib/submitContact.js';
+import Sunburst from './Sunburst.jsx';
 
 const field =
   'w-full border-b border-dark/25 bg-transparent py-3 text-dark placeholder:text-dark/35 focus:border-dark focus:outline-none';
@@ -72,9 +73,12 @@ export default function Contact() {
         </form>
       </div>
 
-      {/* Legal strip */}
-      <div className="bg-dark/85 text-light/60">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12">
+      {/* Legal strip. From the printed card, restrained: one small mark in
+          one corner, not a repeating pattern — Hosting keeps its own
+          separate "no decoration" rule untouched. */}
+      <div className="relative overflow-hidden bg-dark/85 text-light/60">
+        <Sunburst className="pointer-events-none absolute right-0 bottom-0 h-40 w-40 text-brass/50 md:h-56 md:w-56" />
+        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 py-12">
           <span className="font-display text-xl tracking-[0.18em] text-light">{wordmark}</span>
           <p className="max-w-[74ch] border-t border-light/20 pt-6 text-sm leading-[1.7]">
             {footer.legal}
