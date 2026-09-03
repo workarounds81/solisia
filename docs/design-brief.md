@@ -105,6 +105,30 @@ gives no evidence either way for the off-white token.
 
 ## Decisions
 
+- **Globe rotation no longer respects `prefers-reduced-motion`.** Direct
+  feedback: gating the animation on that setting effectively disabled it
+  for most mobile visitors, since reduce-motion is commonly on there
+  (battery-saving toggles, defaults) — not a niche accessibility edge
+  case for this audience. Re-examined against what the setting is
+  actually for: WCAG's target is disruptive motion (parallax, flashing,
+  vestibular-triggering effects), not small-scale ambient background
+  motion, so a slow autonomous spin doesn't need to be suppressed by it.
+  Landed on a split: the autonomous rotation + camera dolly always run;
+  only the scroll-position-coupled nudge still checks the setting, since
+  motion synced to the user's own scroll input is exactly the pattern
+  WCAG 2.3.3 (Animation from Interactions) calls out. Verified with
+  Playwright's `reducedMotion: 'reduce'` context emulation: two
+  screenshots 4 seconds apart show the dot cluster has visibly rotated
+  even with the setting forced on.
+- **Mobile dot size and density, reported as "a bunch of dots instead of
+  a globe."** Found a real, backwards assumption in the numbers: mobile
+  particles were set *larger* than desktop (0.045 vs 0.036) on the theory
+  that small screens need bigger UI elements. Wrong for a point cloud —
+  what resolves as "a sphere" rather than "a handful of blobs" is
+  density (many small points), not per-dot size. Mobile is now smaller
+  than desktop (0.024 vs 0.036) with count raised from 750 to 1300 to
+  compensate, and opacity nudged up slightly (0.85 vs 0.75) so the finer
+  points don't read as fainter overall.
 - **Globe not animating, reported on mobile.** Investigated but not
   reproduced: tested against real mobile-device emulation profiles (iPhone
   13 and Pixel 5 — genuine mobile UA, touch support, correct DPR) with a

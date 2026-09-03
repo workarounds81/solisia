@@ -132,12 +132,20 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   // Normal blending, not additive: additive barely registers against the
   // light sections (white + a mid-brightness tint stays close to white) —
   // this needs to read clearly against both bg-light and bg-dark.
+  //
+  // Mobile dots are smaller than desktop, not bigger — a prior version had
+  // this backwards (0.045 on mobile vs 0.036 on desktop) on the assumption
+  // that smaller screens need bigger UI elements. Wrong for a point cloud:
+  // fewer, larger dots read as "a handful of blobs," not "a sphere." What
+  // resolves into a recognisable globe is density — many small points —
+  // which is why mobile's particle count also goes up here, not down.
+  const isMobile = width < 640;
   const material = new THREE.PointsMaterial({
     color: BRASS,
-    size: width < 640 ? 0.045 : 0.036,
+    size: isMobile ? 0.024 : 0.036,
     sizeAttenuation: true,
     transparent: true,
-    opacity: 0.75, // +15% from 0.65, per feedback to make it a little more obvious
+    opacity: isMobile ? 0.85 : 0.75,
     blending: THREE.NormalBlending,
     depthWrite: false,
   });
@@ -160,21 +168,25 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   let raf = null;
   let scrollNudge = 0;
 
-  function renderStaticFrame() {
-    renderer.render(scene, camera);
-  }
-
   function frame() {
     raf = requestAnimationFrame(frame);
     const delta = clock.getDelta();
     const t = clock.getElapsedTime();
-    group.rotation.y += delta * AUTO_ROTATE_SPEED + scrollNudge * delta * 0.4;
+    // The autonomous rotation + dolly always run — this is small-scale
+    // ambient background motion, not the disruptive kind
+    // prefers-reduced-motion exists to suppress (parallax, flashing,
+    // vestibular-triggering effects). Only the scroll-coupled nudge is
+    // gated on it: motion synced to the user's own scroll input is exactly
+    // the pattern accessibility guidance (WCAG 2.3.3) calls out, unlike
+    // this autonomous spin.
+    const nudge = reducedMotion ? 0 : scrollNudge * delta * 0.4;
+    group.rotation.y += delta * AUTO_ROTATE_SPEED + nudge;
     camera.position.z = DOLLY_BASE + Math.sin((t / DOLLY_PERIOD) * Math.PI * 2) * DOLLY_AMPLITUDE;
     renderer.render(scene, camera);
   }
 
   function start() {
-    if (raf || reducedMotion) return;
+    if (raf) return;
     frame();
   }
   function stop() {
@@ -190,7 +202,6 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
-    if (reducedMotion) renderStaticFrame();
   }
   function dispose() {
     stop();
@@ -203,8 +214,6 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
       container.removeChild(renderer.domElement);
     }
   }
-
-  if (reducedMotion) renderStaticFrame();
 
   return { start, stop, setScrollNudge, resize, dispose };
 }

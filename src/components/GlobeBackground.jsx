@@ -1,7 +1,11 @@
 import { useEffect, useRef } from 'react';
 
 const COUNT_DESKTOP = 1700;
-const COUNT_MOBILE = 750;
+// Higher than it looks like it should need to be: mobile dots render
+// smaller than desktop (see createParticleGlobe.js), and a low count of
+// small dots reads as sparse noise rather than a sphere. Density is what
+// makes the silhouette resolve at a glance.
+const COUNT_MOBILE = 1300;
 const MOBILE_BREAKPOINT = 640;
 
 /**
@@ -67,7 +71,10 @@ export default function GlobeBackground() {
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('pageshow', onPageShow);
 
-      if (!reducedMotion && !document.hidden) globe.start();
+      // The rotation itself always runs regardless of reducedMotion — see
+      // the comment in createParticleGlobe.js's frame(). It's still passed
+      // through so the scroll-coupled nudge specifically can be suppressed.
+      if (!document.hidden) globe.start();
     });
 
     return () => {
