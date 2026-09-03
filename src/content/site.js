@@ -138,7 +138,7 @@ export const trackRecord = {
 
 export const contact = {
   heading: 'If you are raising, start early.',
-  email: 'rey@solisia.net',
+  email: 'info@solisia.net',
   phone: '+65 9857 5090',
   phoneHref: '+6598575090',
   website: 'solisia.net',
