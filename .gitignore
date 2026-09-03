@@ -3,8 +3,7 @@ node_modules/
 
 # Build output
 dist/
-build/
-.cache/
+.vite/
 
 # Environment
 .env
@@ -14,7 +13,6 @@ build/
 # OS cruft
 .DS_Store
 Thumbs.db
-desktop.ini
 
 # Editors
 .vscode/*
