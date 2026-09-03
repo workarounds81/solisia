@@ -34,19 +34,20 @@ jobs:
       - name: Install
         run: npm ci
 
-      # main -> production, served at the site root.
-      # anything else -> preview, served at /preview/ so it never touches
-      # the production build. Vite's `base` has to match at build time so
-      # the built asset URLs resolve under the right subpath.
+      # main -> production, served at the solisia.net domain root (see
+      # public/CNAME). anything else -> preview, served at /preview/ under
+      # that same domain so it never touches the production build. Vite's
+      # `base` has to match at build time so the built asset URLs resolve
+      # under the right subpath.
       - name: Determine publish target
         id: target
         run: |
           if [ "${{ github.ref_name }}" = "main" ]; then
-            echo "base=/solisia/" >> "$GITHUB_OUTPUT"
+            echo "base=/" >> "$GITHUB_OUTPUT"
             echo "subdir=" >> "$GITHUB_OUTPUT"
             echo "label=production" >> "$GITHUB_OUTPUT"
           else
-            echo "base=/solisia/preview/" >> "$GITHUB_OUTPUT"
+            echo "base=/preview/" >> "$GITHUB_OUTPUT"
             echo "subdir=preview" >> "$GITHUB_OUTPUT"
             echo "label=preview" >> "$GITHUB_OUTPUT"
           fi

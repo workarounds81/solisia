@@ -1,13 +1,13 @@
 # Solisia
 
 Landing page for Solisia. Vite + React + Tailwind CSS v4, deployed to GitHub
-Pages for free.
+Pages for free, served at the custom domain solisia.net.
 
 ## Develop
 
 ```bash
 npm install
-npm run dev       # http://localhost:5173/solisia/
+npm run dev       # http://localhost:5173/
 npm run build     # outputs dist/
 npm run preview   # serves dist/ locally
 ```
@@ -19,9 +19,10 @@ Node 22 or later.
 ```
 .
 ├── index.html                  # Entry; loads Google Fonts
-├── vite.config.js              # base: '/solisia/' for the Pages subpath
+├── vite.config.js              # base: '/' — served at the solisia.net root
 ├── public/
 │   ├── .nojekyll               # Stops Pages running Jekyll on the output
+│   ├── CNAME                   # solisia.net — GitHub Pages custom domain
 │   └── 404.html                # Self-contained not-found page
 ├── src/
 │   ├── index.css               # Tailwind + @theme design tokens
@@ -64,15 +65,17 @@ by side on it, chosen by which branch triggered the run:
 
 | Push to | Vite `base` | Published to | Served at |
 | --- | --- | --- | --- |
-| `main` | `/solisia/` | `gh-pages:/` (root) | <https://workarounds81.github.io/solisia/> |
-| `claude/solisia-landing-setup-sztnel` | `/solisia/preview/` | `gh-pages:/preview/` | <https://workarounds81.github.io/solisia/preview/> |
+| `main` | `/` | `gh-pages:/` (root) | <https://solisia.net/> |
+| `claude/solisia-landing-setup-sztnel` | `/preview/` | `gh-pages:/preview/` | <https://solisia.net/preview/> |
 
 The publish step checks out the existing `gh-pages` branch and replaces only
 its own target directory, so a preview push never touches the production
 files and vice versa — there's always a live preview to review before
-promoting anything to `main`. This is a *project* site served from a
-subpath, which is why the base path has to match at build time; if a custom
-apex domain is added later, both go away and `base` becomes `'/'`.
+promoting anything to `main`. `public/CNAME` (`solisia.net`) is what tells
+GitHub Pages to serve the site at the custom domain instead of
+`workarounds81.github.io/solisia/`; DNS for the domain has to point at
+GitHub Pages for it to resolve (A records at the apex, or a CNAME on `www`
+— see GitHub's "Managing a custom domain" docs).
 
 The workflow deliberately avoids the `github-pages` environment and the
 `deploy-pages` action; it only needs `contents: write` to push a branch.

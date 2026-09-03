@@ -249,6 +249,17 @@ gives no evidence either way for the off-white token.
   for the material (dark dots on light sections, light/brass dots on dark
   ones) rather than one colour sitewide.
 
+- **Custom domain (solisia.net) wired up.** `public/CNAME` added, `vite.config.js`
+  and `deploy.yml`'s per-branch base both switched from the GitHub Pages
+  project-site subpath (`/solisia/`, `/solisia/preview/`) to the domain
+  root (`/`, `/preview/`). `public/404.html` had a hardcoded `/solisia/`
+  "back to home" link and the *original* placeholder palette
+  (`#132220`/`#a9833f`) baked into inline `<style>` rather than reading the
+  real tokens (it's deliberately self-contained, so it can't `@import`
+  index.css) — both fixed while touching the file: link now `/`, colours
+  now `#070C0F`/`#E6AD3D`. DNS itself is outside this repo's control —
+  documented for whoever manages the registrar, not done here.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.
