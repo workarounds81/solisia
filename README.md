@@ -57,3 +57,23 @@ some browser behaviour differ from a real server — prefer one of the above.
 The current `index.html` is a placeholder scaffold. The token values in
 `tokens.css` are neutral defaults, not the Solisia brand palette. Both get
 replaced once the design brief and page markup land.
+
+## Deployment
+
+The site deploys to GitHub Pages automatically on every push to `main`, via
+`.github/workflows/deploy.yml`. There is no build step — the repository root is
+published as-is.
+
+Live URL: <https://workarounds81.github.io/solisia/>
+
+Because this is a *project* site, it is served from the `/solisia/` subpath
+rather than a domain root. Two consequences worth remembering:
+
+- **Use relative asset paths** (`assets/css/...`), never root-absolute ones
+  (`/assets/css/...`) — the latter would resolve to the wrong place.
+- `404.html` is self-contained (inline styles) because GitHub serves it for
+  missing URLs at any depth, where relative paths are unreliable. Its
+  "Back to home" link is hardcoded to `/solisia/`.
+
+If a custom domain is added later at the apex, the subpath goes away and that
+`404.html` link should become `/`.
