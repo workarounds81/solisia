@@ -5,9 +5,9 @@
    Exposes utilities: bg-dark / text-light / text-brass, font-display / font-body.
    ------------------------------------------------------------------------ */
 @theme {
-  --color-dark: #132220;
+  --color-dark: #070c0f;
   --color-light: #f2f4ef;
-  --color-brass: #a9833f;
+  --color-brass: #e6ad3d;
 
   --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
   --font-body: 'Instrument Sans', system-ui, -apple-system, sans-serif;

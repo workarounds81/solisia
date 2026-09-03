@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-const BRASS = 0xa9833f;
+const BRASS = 0xe6ad3d;
 const RADIUS = 2.3;
 
 /**

@@ -15,11 +15,21 @@ Loaded from Google Fonts in `index.html`. Tokens: `font-display`, `font-body`.
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `dark` | `#132220` | Text on light; full-bleed hosting block |
+| `dark` | `#070C0F` | Text on light; full-bleed hosting block |
 | `light` | `#F2F4EF` | Page background; text on dark |
-| `brass` | `#A9833F` | The **single** accent. Small labels and active states only. |
+| `brass` | `#E6AD3D` | The **single** accent. Small labels and active states only. |
 
 Defined once in `src/index.css` under `@theme`.
+
+`dark` and `brass` are colour-matched to the printed business card
+(`Solisia_Back.pdf`) via pixel sampling of its embedded raster — dominant
+color mode across 100k+ classified pixels, not eyeballed. Original brief
+values (`#132220` dark forest green, `#A9833F` muted brass) were the
+starting placeholders before physical print collateral existed; the card
+is now the source of truth and is meaningfully different — near-black
+rather than dark green, a brighter/more saturated gold rather than muted
+brass. `light` is unchanged: the card is a dark-background back design and
+gives no evidence either way for the off-white token.
 
 ## Non-negotiable constraints
 

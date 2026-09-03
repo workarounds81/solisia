@@ -1,7 +1,7 @@
 import { nav, wordmark } from '../content/site.js';
 
 /**
- * Sticky, 4rem tall, permanently dark ("green" #132220) — the one fixed
+ * Sticky, 4rem tall, permanently dark (near-black #070C0F) — the one fixed
  * point of contrast against the light sections and the globe behind them.
  * Deliberately not tone-reactive: it used to switch to match whichever
  * section was in view, which read as flickering rather than ambient.
