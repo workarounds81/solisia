@@ -52,7 +52,13 @@ jobs:
             echo "label=preview" >> "$GITHUB_OUTPUT"
           fi
 
+      # Formspree endpoint for the contact form (src/lib/submitContact.js).
+      # Not a secret — it ends up embedded in the public JS bundle either
+      # way, same as it would in any client-side form integration — so it's
+      # set directly here rather than routed through repo secrets/vars.
       - name: Build
+        env:
+          VITE_CONTACT_ENDPOINT: https://formspree.io/f/xzebglqy
         run: npx vite build --base="${{ steps.target.outputs.base }}"
 
       - name: Publish to gh-pages
