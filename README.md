@@ -60,9 +60,18 @@ replaced once the design brief and page markup land.
 
 ## Deployment
 
-The site deploys to GitHub Pages automatically on every push to `main`, via
-`.github/workflows/deploy.yml`. There is no build step — the repository root is
-published as-is.
+The site is served by GitHub Pages directly from the `main` branch
+(*Settings → Pages → Source: Deploy from a branch → `main` / `(root)`*). Every
+push to `main` republishes it, usually within a minute.
+
+There is deliberately no build step and no deploy workflow: the repository root
+*is* the site. `.nojekyll` is what makes this safe — without it Pages would run
+the files through Jekyll, which ignores paths beginning with an underscore.
+Don't delete it.
+
+If a build step is ever added (a bundler, Tailwind, minification), this becomes
+a GitHub Actions deployment instead, and the Pages source has to change to
+"GitHub Actions" to match.
 
 Live URL: <https://workarounds81.github.io/solisia/>
 
