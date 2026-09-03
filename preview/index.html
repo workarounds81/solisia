@@ -9,8 +9,13 @@
       content="Solisia is an Asia-based investor relations and capital advisory firm working with founders and funds across Southeast Asia."
     />
 
-    <!-- No logo mark, by design. Suppresses the default favicon request. -->
-    <link rel="icon" href="data:," />
+    <!-- The printed card's sunburst mark (see src/components/Sunburst.jsx),
+         redrawn at favicon scale: fewer rays, thicker strokes, no length
+         jitter — the full-size version's irregularity just reads as noise
+         this small. Generated via public/favicon.svg's own geometry. -->
+    <link rel="icon" type="image/svg+xml" href="/preview/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/preview/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/preview/apple-touch-icon.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
