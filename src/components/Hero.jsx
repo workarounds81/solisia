@@ -3,7 +3,6 @@ import { hero } from '../content/site.js';
 export default function Hero() {
   return (
     <section
-      data-tone="light"
       className="border-b border-dark/15 bg-light/50 text-dark"
     >
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-36 md:pb-40">

@@ -3,7 +3,7 @@ import { trackRecord } from '../content/site.js';
 /** Anonymised as a matter of course: sector and outcome only, never a client name. */
 export default function TrackRecord() {
   return (
-    <section id="record" data-tone="light" className="border-t border-dark/15 bg-light/50 text-dark">
+    <section id="record" className="border-t border-dark/15 bg-light/50 text-dark">
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
           {trackRecord.heading}

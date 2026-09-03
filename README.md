@@ -38,9 +38,7 @@ Node 22 or later.
 │   │   ├── TrackRecord.jsx     # Anonymised
 │   │   └── Contact.jsx         # Footer + form
 │   ├── three/createParticleGlobe.js  # Vanilla three.js, no r3f/GSAP
-│   ├── hooks/
-│   │   ├── useContactForm.js
-│   │   └── useSectionTone.js   # Drives the ambient masthead tone shift
+│   ├── hooks/useContactForm.js
 │   └── lib/submitContact.js    # Form transport (endpoint or mailto)
 └── docs/design-brief.md        # Design constraints — read before changing styles
 ```

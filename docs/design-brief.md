@@ -42,15 +42,26 @@ Defined once in `src/index.css` under `@theme`.
   group's rotation changes per frame (slow constant auto-rotate, ~0.055
   rad/s, plus a light scroll-position nudge), which is why it can run for
   the whole session without a per-vertex update loop.
+- **Camera dolly ("swoop"):** `camera.position.z` oscillates on a slow sine
+  wave (base 6.4, amplitude ±1.7, 14s full cycle) on top of the rotation —
+  the globe periodically drifts closer, then eases back out.
 - **Blending note:** first pass used `AdditiveBlending`, which is close to
   invisible against a light background (white + a mid-brightness tint stays
   near white) — fine for a dark hero, wrong once the globe had to read
   against `bg-light` sections too. Switched to `NormalBlending`.
-- **Section backgrounds are translucent + blurred** (`bg-light/85
-  backdrop-blur-sm`, `bg-dark/85` for Hosting) precisely so the fixed globe
-  layer shows through everywhere, not just Hero. This extends the glass
-  language already used on Services sitewide rather than introducing a
-  separate treatment.
+- **Section backgrounds are translucent** (`bg-light/50`, `bg-dark/55` for
+  Hosting) so the fixed globe layer shows through everywhere, not just Hero.
+  No `backdrop-blur` on these full-page washes — blur smears the sparse
+  point cloud into a low-contrast haze rather than dimming it, which is what
+  made the first version of this "barely visible" per direct feedback. Blur
+  stays only on small-scale glass elements: the masthead, the Services
+  filter bar, and the individual service row cards.
+- **Masthead is permanently dark**, not tone-reactive. An earlier version
+  tracked which section was in view and switched the header light/dark to
+  match — reported back as the header "flickering" between white and green
+  rather than reading as ambient, so that whole mechanism
+  (`useSectionTone.js` + the `data-tone` attributes + the CSS driving it)
+  was removed rather than kept unused.
 - **Perf guards:** three.js is dynamically imported (its own ~130KB gzip
   chunk, not in the main bundle), particle count roughly halves under
   640px, the render loop pauses on `visibilitychange`, and

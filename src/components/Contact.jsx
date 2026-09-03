@@ -21,7 +21,7 @@ export default function Contact() {
   const busy = status === 'submitting';
 
   return (
-    <footer id="contact" data-tone="light" className="border-t border-dark/15 bg-light/50 text-dark">
+    <footer id="contact" className="border-t border-dark/15 bg-light/50 text-dark">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
         {/* Details */}
         <div>

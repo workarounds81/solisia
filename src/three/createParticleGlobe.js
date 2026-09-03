@@ -128,6 +128,14 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   scene.add(group);
 
   const AUTO_ROTATE_SPEED = 0.055; // rad/sec, slow and steady
+
+  // Slow camera dolly — the globe periodically drifts closer, then eases
+  // back out, on top of the constant rotation. One full in-and-out cycle
+  // takes DOLLY_PERIOD seconds; DOLLY_AMPLITUDE sets how far it travels.
+  const DOLLY_BASE = 6.4;
+  const DOLLY_AMPLITUDE = 1.7;
+  const DOLLY_PERIOD = 14;
+
   const clock = new THREE.Clock();
   let raf = null;
   let scrollNudge = 0;
@@ -139,7 +147,9 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   function frame() {
     raf = requestAnimationFrame(frame);
     const delta = clock.getDelta();
+    const t = clock.getElapsedTime();
     group.rotation.y += delta * AUTO_ROTATE_SPEED + scrollNudge * delta * 0.4;
+    camera.position.z = DOLLY_BASE + Math.sin((t / DOLLY_PERIOD) * Math.PI * 2) * DOLLY_AMPLITUDE;
     renderer.render(scene, camera);
   }
 
