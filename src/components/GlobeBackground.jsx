@@ -31,6 +31,13 @@ export default function GlobeBackground() {
       if (document.hidden) globe.stop();
       else globe.start();
     }
+    // Safari's back/forward cache freezes the whole page, rAF loop included,
+    // on navigating away — and does not fire visibilitychange on return.
+    // Without this, coming back via the back button leaves the globe
+    // permanently stopped even though the page looks otherwise normal.
+    function onPageShow() {
+      if (globe && !document.hidden) globe.start();
+    }
     function onResize() {
       if (resizeRaf) return;
       resizeRaf = requestAnimationFrame(() => {
@@ -58,6 +65,7 @@ export default function GlobeBackground() {
       document.addEventListener('visibilitychange', onVisibilityChange);
       window.addEventListener('resize', onResize);
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('pageshow', onPageShow);
 
       if (!reducedMotion && !document.hidden) globe.start();
     });
@@ -67,6 +75,7 @@ export default function GlobeBackground() {
       document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', onResize);
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('pageshow', onPageShow);
       if (resizeRaf) cancelAnimationFrame(resizeRaf);
       if (scrollRaf) cancelAnimationFrame(scrollRaf);
       globe?.dispose();

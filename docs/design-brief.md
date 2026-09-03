@@ -105,7 +105,40 @@ gives no evidence either way for the off-white token.
 
 ## Decisions
 
-- **Two supporting images**, per the earlier "too vanilla" feedback:
+- **Globe not animating, reported on mobile.** Investigated but not
+  reproduced: tested against real mobile-device emulation profiles (iPhone
+  13 and Pixel 5 — genuine mobile UA, touch support, correct DPR) with a
+  fresh build; WebGL initialises, the canvas renders, no console errors,
+  and `prefers-reduced-motion` reads `false`. Couldn't test the actual live
+  URL or a real device from this environment. Found and fixed two real gaps
+  regardless, since they're genuine mobile-only failure modes even though
+  neither was confirmed as *the* cause here:
+  - No `webglcontextlost`/`webglcontextrestored` handling. Mobile browsers
+    reclaim WebGL contexts far more aggressively than desktop (memory
+    pressure from other apps, backgrounding). Without handling this, a
+    reclaimed context leaves the canvas showing its last frame forever —
+    the rAF loop keeps calling `renderer.render()` into a context that no
+    longer exists, which looks exactly like "frozen" rather than erroring.
+    `createParticleGlobe.js` now calls `event.preventDefault()` on loss
+    (required for the browser to even attempt restoration) and resumes via
+    the existing `start()`/`stop()` on restore.
+  - No `pageshow` handling. Safari's back/forward cache freezes the whole
+    page — including the rAF loop — on navigating away, and does not fire
+    `visibilitychange` on return from it. `GlobeBackground.jsx` now also
+    listens for `pageshow` and restarts the loop if the page isn't hidden.
+  Two things worth checking on the actual device if it's still stuck after
+  this: whether iOS/Android "Reduce Motion" is on (the code intentionally
+  renders one static frame and never starts the loop when that's set —
+  working as designed, but invisible to a user who doesn't know the
+  setting exists), and which browser/context it's viewed in (an in-app
+  browser, e.g. Instagram/TikTok's, can report page visibility oddly).
+- **The two supporting images were removed** ("pictures are a joke") —
+  EngagementWorkflow and TrackRecord are back to text-only, and
+  `src/assets/img/` no longer exists. The "too vanilla" feedback that led to
+  adding them still stands as unresolved; the images just weren't the right
+  answer. Read the removed entry below for what was tried and why, in case
+  the next attempt wants the context. Reverted below, superseded by this one:
+- ~~**Two supporting images**~~, per the earlier "too vanilla" feedback:
   `src/assets/img/engagement-room.jpg` (a real photo, in EngagementWorkflow)
   and `track-record-network.jpg` (an abstract network graphic, in
   TrackRecord). Both are flat-bordered banners (`border-dark/15`,

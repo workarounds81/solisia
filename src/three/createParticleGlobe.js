@@ -98,6 +98,26 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   renderer.domElement.style.display = 'block';
   container.appendChild(renderer.domElement);
 
+  // Mobile browsers reclaim WebGL contexts far more aggressively than
+  // desktop (memory pressure from other apps, backgrounding, etc.). Without
+  // this, a reclaimed context leaves the canvas showing its last frame
+  // forever — the rAF loop keeps calling renderer.render() but there is no
+  // GL context left to draw into, so it looks "frozen" rather than erroring.
+  // start()/stop() are defined further down but hoisted (function
+  // declarations), so referencing them here is safe — these callbacks only
+  // ever run later, once the browser fires the actual events.
+  let wasRunningBeforeLoss = false;
+  function onContextLost(event) {
+    event.preventDefault(); // required for the browser to attempt restoration
+    wasRunningBeforeLoss = raf !== null;
+    stop();
+  }
+  function onContextRestored() {
+    if (wasRunningBeforeLoss) start();
+  }
+  renderer.domElement.addEventListener('webglcontextlost', onContextLost, false);
+  renderer.domElement.addEventListener('webglcontextrestored', onContextRestored, false);
+
   const points = landPositions(count, RADIUS);
   const positions = new Float32Array(points.length * 3);
   points.forEach(([x, y, z], i) => {
@@ -174,6 +194,8 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   }
   function dispose() {
     stop();
+    renderer.domElement.removeEventListener('webglcontextlost', onContextLost);
+    renderer.domElement.removeEventListener('webglcontextrestored', onContextRestored);
     geometry.dispose();
     material.dispose();
     renderer.dispose();
