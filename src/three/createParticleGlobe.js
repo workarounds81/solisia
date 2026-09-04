@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { Line2 } from 'three/examples/jsm/lines/Line2.js';
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 
 // Matches the masthead's near-black (see index.css --color-dark /
 // Masthead.jsx bg-dark) rather than the brand's brass accent — brass read as
@@ -86,13 +89,15 @@ function landPositions(targetCount, radius) {
 }
 
 /**
- * One wavy, roughly-latitudinal ring — a stylised jet stream, not a real
- * wind-data plot. Standard spherical-to-Cartesian (Y as the polar axis),
- * the same convention `group`'s tilt below relies on, so a ring built here
- * lines up with the land dots once both get the same rotation.x.
+ * Flat [x,y,z, x,y,z, ...] positions for one wavy, roughly-latitudinal
+ * ring — a stylised jet stream, not a real wind-data plot. Standard
+ * spherical-to-Cartesian (Y as the polar axis), the same convention
+ * `group`'s tilt below relies on, so a ring built here lines up with the
+ * land dots once both get the same rotation.x. Closed by repeating the
+ * first point at the end — Line2 draws an open polyline, not a loop.
  */
-function createJetStreamRing({ radius, baseLatDeg, amplitudeDeg, frequency, phase, segments = 160 }) {
-  const positions = new Float32Array((segments + 1) * 3);
+function jetStreamRingPositions({ radius, baseLatDeg, amplitudeDeg, frequency, phase, segments = 160 }) {
+  const positions = new Array((segments + 1) * 3);
   for (let s = 0; s <= segments; s++) {
     const lonDeg = (s / segments) * 360;
     const latDeg = baseLatDeg + amplitudeDeg * Math.sin(((lonDeg * frequency) / 180) * Math.PI + phase);
@@ -102,9 +107,7 @@ function createJetStreamRing({ radius, baseLatDeg, amplitudeDeg, frequency, phas
     positions[s * 3 + 1] = radius * Math.sin(latRad);
     positions[s * 3 + 2] = radius * Math.cos(latRad) * Math.sin(lonRad);
   }
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  return geometry;
+  return positions;
 }
 
 /**
@@ -189,19 +192,26 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   // they read as a distinct wind layer rather than competing with the
   // dots for the same surface. Three different base latitudes/tilts so
   // they crisscross rather than sit as parallel graticule lines.
-  // A WebGL line is 1 device pixel wide regardless of material.linewidth
-  // (ignored on the ANGLE/D3D backend Chrome uses) and gets anti-aliased
-  // against the background, so a "subtle" opacity here reads as
-  // essentially invisible rather than a fine gold line — 0.22 measured as
-  // a ~2-unit RGB shift on screen, indistinguishable from background.
-  // 0.55 is what actually produces a visible, still-thin line.
-  const jetMaterial = new THREE.LineBasicMaterial({
+  //
+  // Line2/LineMaterial (three's fat-lines addon), not THREE.LineLoop +
+  // LineBasicMaterial: an ordinary WebGL line is always exactly 1 device
+  // pixel wide — material.linewidth on LineBasicMaterial is ignored on the
+  // ANGLE/D3D backend Chrome uses — so there is no way to make one
+  // genuinely thicker. Line2 draws real screen-space-width geometry
+  // instead. linewidth here is in pixels (not world units), so it stays a
+  // constant on-screen thickness through the camera dolly rather than
+  // changing with distance; resolution has to be kept in sync with the
+  // renderer's size (see resize() below) or the width comes out wrong.
+  const jetMaterial = new LineMaterial({
     color: JET_COLOR,
     transparent: true,
-    opacity: 0.55,
+    opacity: 0.6,
+    linewidth: 2.5, // pixels
+    worldUnits: false,
     blending: THREE.NormalBlending, // additive is near-invisible on light sections, per the dots above
     depthWrite: false,
   });
+  jetMaterial.resolution.set(width, height);
   const JET_RADIUS = RADIUS * 1.06;
   const jetRings = [
     { baseLatDeg: 22, amplitudeDeg: 9, frequency: 3, phase: 0, tiltZ: 0 },
@@ -210,14 +220,12 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   ];
   const jetGroup = new THREE.Group();
   const jetGeometries = jetRings.map(({ baseLatDeg, amplitudeDeg, frequency, phase, tiltZ }) => {
-    const ringGeometry = createJetStreamRing({
-      radius: JET_RADIUS,
-      baseLatDeg,
-      amplitudeDeg,
-      frequency,
-      phase,
-    });
-    const line = new THREE.LineLoop(ringGeometry, jetMaterial);
+    const ringGeometry = new LineGeometry();
+    ringGeometry.setPositions(
+      jetStreamRingPositions({ radius: JET_RADIUS, baseLatDeg, amplitudeDeg, frequency, phase })
+    );
+    const line = new Line2(ringGeometry, jetMaterial);
+    line.computeLineDistances();
     line.rotation.z = tiltZ;
     jetGroup.add(line);
     return ringGeometry;
@@ -274,6 +282,7 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
+    jetMaterial.resolution.set(w, h); // Line2's pixel-width math depends on this matching the actual render size
   }
   function dispose() {
     stop();

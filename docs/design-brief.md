@@ -61,19 +61,30 @@ gives no evidence either way for the off-white token.
 - **Camera dolly ("swoop"):** `camera.position.z` oscillates on a slow sine
   wave (base 6.4, amplitude ±1.7, 14s full cycle) on top of the rotation —
   the globe periodically drifts closer, then eases back out.
-- **Jet streams:** three wavy gold (`#E6AD3D`) rings, `createJetStreamRing()`
-  in the same file, floating just outside the dot sphere (`RADIUS * 1.06`)
-  so they read as a separate wind layer rather than fighting the dots for
-  the same surface. Their own group rotates opposite the dots' rotation
-  (`JET_ROTATE_SPEED`, subtracted where the dots' speed is added) and at a
-  different magnitude, so it doesn't read as a mirrored copy. Opacity
-  needed to land far higher than expected — a WebGL line is always 1
-  device pixel wide (`material.linewidth` is ignored on the ANGLE/D3D
-  backend Chrome uses) and gets anti-aliased against the background, so an
-  initial "subtle" 0.22 measured as a ~2-unit RGB shift on screen,
-  effectively invisible; 0.55 is what a real screenshot showed as an
-  actually-visible fine line. Checked directly by sampling pixel colour
-  against the computed background+brass blend, not eyeballed.
+- **Jet streams:** three wavy gold (`#E6AD3D`) rings, positions from
+  `jetStreamRingPositions()` in the same file, floating just outside the dot
+  sphere (`RADIUS * 1.06`) so they read as a separate wind layer rather than
+  fighting the dots for the same surface. Their own group rotates opposite
+  the dots' rotation (`JET_ROTATE_SPEED`, subtracted where the dots' speed
+  is added) and at a different magnitude, so it doesn't read as a mirrored
+  copy.
+  Rendered with `Line2`/`LineMaterial`/`LineGeometry` (three's fat-lines
+  addon under `three/examples/jsm/lines/`), not `THREE.LineLoop` +
+  `LineBasicMaterial`: an ordinary WebGL line is always exactly 1 device
+  pixel wide — `LineBasicMaterial.linewidth` is ignored on the ANGLE/D3D
+  backend Chrome uses, so there's no way to make one genuinely thicker.
+  First pass tried compensating with opacity alone (still 1px, just less
+  transparent) and landed at 0.55 after measuring actual on-screen pixel
+  colour against the computed background+brass blend rather than
+  eyeballing it — but "thicker" was the explicit follow-up ask, which
+  opacity alone can't deliver on a 1px line. `LineMaterial` draws real
+  screen-space geometry instead (`linewidth: 2.5`, in pixels, `worldUnits:
+  false` so it stays a constant on-screen width through the camera dolly
+  rather than changing with distance) — opacity could then come back down
+  to 0.6. `LineMaterial.resolution` has to be kept equal to the renderer's
+  actual size or the pixel-width math comes out wrong; `resize()` updates
+  it alongside `renderer.setSize()`. Verified after a viewport resize in a
+  real browser that the width stays correct, not just at initial load.
 - **Blending note:** first pass used `AdditiveBlending`, which is close to
   invisible against a light background (white + a mid-brightness tint stays
   near white) — fine for a dark hero, wrong once the globe had to read
