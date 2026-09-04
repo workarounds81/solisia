@@ -7,6 +7,7 @@ import * as THREE from 'three';
 // the dark sections (Masthead itself, Hosting, Contact) since they're then
 // nearly the same colour as their background.
 const DOT_COLOR = 0x070c0f;
+const JET_COLOR = 0xe6ad3d; // brass — matches --color-brass in index.css
 const RADIUS = 2.3;
 
 /**
@@ -82,6 +83,28 @@ function landPositions(targetCount, radius) {
   const picked = [];
   for (let i = 0; i < targetCount; i++) picked.push(land[Math.floor(i * step)]);
   return picked;
+}
+
+/**
+ * One wavy, roughly-latitudinal ring — a stylised jet stream, not a real
+ * wind-data plot. Standard spherical-to-Cartesian (Y as the polar axis),
+ * the same convention `group`'s tilt below relies on, so a ring built here
+ * lines up with the land dots once both get the same rotation.x.
+ */
+function createJetStreamRing({ radius, baseLatDeg, amplitudeDeg, frequency, phase, segments = 160 }) {
+  const positions = new Float32Array((segments + 1) * 3);
+  for (let s = 0; s <= segments; s++) {
+    const lonDeg = (s / segments) * 360;
+    const latDeg = baseLatDeg + amplitudeDeg * Math.sin(((lonDeg * frequency) / 180) * Math.PI + phase);
+    const latRad = (latDeg * Math.PI) / 180;
+    const lonRad = (lonDeg * Math.PI) / 180;
+    positions[s * 3] = radius * Math.cos(latRad) * Math.cos(lonRad);
+    positions[s * 3 + 1] = radius * Math.sin(latRad);
+    positions[s * 3 + 2] = radius * Math.cos(latRad) * Math.sin(lonRad);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  return geometry;
 }
 
 /**
@@ -161,7 +184,49 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
   group.rotation.x = 0.35; // slight axial tilt, like a real globe
   scene.add(group);
 
+  // Jet streams: a handful of wavy gold rings drifting opposite the land
+  // dots' rotation, floating just outside that sphere (RADIUS * 1.06) so
+  // they read as a distinct wind layer rather than competing with the
+  // dots for the same surface. Three different base latitudes/tilts so
+  // they crisscross rather than sit as parallel graticule lines.
+  // A WebGL line is 1 device pixel wide regardless of material.linewidth
+  // (ignored on the ANGLE/D3D backend Chrome uses) and gets anti-aliased
+  // against the background, so a "subtle" opacity here reads as
+  // essentially invisible rather than a fine gold line — 0.22 measured as
+  // a ~2-unit RGB shift on screen, indistinguishable from background.
+  // 0.55 is what actually produces a visible, still-thin line.
+  const jetMaterial = new THREE.LineBasicMaterial({
+    color: JET_COLOR,
+    transparent: true,
+    opacity: 0.55,
+    blending: THREE.NormalBlending, // additive is near-invisible on light sections, per the dots above
+    depthWrite: false,
+  });
+  const JET_RADIUS = RADIUS * 1.06;
+  const jetRings = [
+    { baseLatDeg: 22, amplitudeDeg: 9, frequency: 3, phase: 0, tiltZ: 0 },
+    { baseLatDeg: -18, amplitudeDeg: 11, frequency: 4, phase: 1.7, tiltZ: 0.55 },
+    { baseLatDeg: 4, amplitudeDeg: 7, frequency: 5, phase: 3.1, tiltZ: -0.4 },
+  ];
+  const jetGroup = new THREE.Group();
+  const jetGeometries = jetRings.map(({ baseLatDeg, amplitudeDeg, frequency, phase, tiltZ }) => {
+    const ringGeometry = createJetStreamRing({
+      radius: JET_RADIUS,
+      baseLatDeg,
+      amplitudeDeg,
+      frequency,
+      phase,
+    });
+    const line = new THREE.LineLoop(ringGeometry, jetMaterial);
+    line.rotation.z = tiltZ;
+    jetGroup.add(line);
+    return ringGeometry;
+  });
+  jetGroup.rotation.x = 0.35; // same tilt as `group`, so both read as one globe
+  scene.add(jetGroup);
+
   const AUTO_ROTATE_SPEED = 0.033; // rad/sec — 40% slower than the original 0.055
+  const JET_ROTATE_SPEED = 0.021; // opposite direction to AUTO_ROTATE_SPEED, different magnitude so it doesn't read as a mirrored copy
 
   // Slow camera dolly — the globe periodically drifts closer, then eases
   // back out, on top of the constant rotation. One full in-and-out cycle
@@ -187,6 +252,7 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
     // this autonomous spin.
     const nudge = reducedMotion ? 0 : scrollNudge * delta * 0.4;
     group.rotation.y += delta * AUTO_ROTATE_SPEED + nudge;
+    jetGroup.rotation.y -= delta * JET_ROTATE_SPEED;
     camera.position.z = DOLLY_BASE + Math.sin((t / DOLLY_PERIOD) * Math.PI * 2) * DOLLY_AMPLITUDE;
     renderer.render(scene, camera);
   }
@@ -215,6 +281,8 @@ export function createParticleGlobe({ container, count, reducedMotion }) {
     renderer.domElement.removeEventListener('webglcontextrestored', onContextRestored);
     geometry.dispose();
     material.dispose();
+    jetGeometries.forEach((g) => g.dispose());
+    jetMaterial.dispose();
     renderer.dispose();
     if (renderer.domElement.parentNode === container) {
       container.removeChild(renderer.domElement);

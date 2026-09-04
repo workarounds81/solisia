@@ -61,6 +61,19 @@ gives no evidence either way for the off-white token.
 - **Camera dolly ("swoop"):** `camera.position.z` oscillates on a slow sine
   wave (base 6.4, amplitude ±1.7, 14s full cycle) on top of the rotation —
   the globe periodically drifts closer, then eases back out.
+- **Jet streams:** three wavy gold (`#E6AD3D`) rings, `createJetStreamRing()`
+  in the same file, floating just outside the dot sphere (`RADIUS * 1.06`)
+  so they read as a separate wind layer rather than fighting the dots for
+  the same surface. Their own group rotates opposite the dots' rotation
+  (`JET_ROTATE_SPEED`, subtracted where the dots' speed is added) and at a
+  different magnitude, so it doesn't read as a mirrored copy. Opacity
+  needed to land far higher than expected — a WebGL line is always 1
+  device pixel wide (`material.linewidth` is ignored on the ANGLE/D3D
+  backend Chrome uses) and gets anti-aliased against the background, so an
+  initial "subtle" 0.22 measured as a ~2-unit RGB shift on screen,
+  effectively invisible; 0.55 is what a real screenshot showed as an
+  actually-visible fine line. Checked directly by sampling pixel colour
+  against the computed background+brass blend, not eyeballed.
 - **Blending note:** first pass used `AdditiveBlending`, which is close to
   invisible against a light background (white + a mid-brightness tint stays
   near white) — fine for a dark hero, wrong once the globe had to read
