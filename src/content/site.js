@@ -104,7 +104,7 @@ export const trackRecord = {
   heading: 'Track record',
   lede: 'Solisia was incorporated in 2026. The experience behind it belongs to its principals, built over a decade of raises across Southeast Asia and beyond. Client names are withheld as a matter of course.',
   figures: [
-    { value: 'US$9M+', label: 'Raised across token, equity and asset-backed structures' },
+    { value: 'US$500M+', label: 'Raised across token, equity and asset-backed structures' },
     { value: 'SAFT, Series A, asset-backed', label: 'Structures raised across', isText: true },
     { value: '10 yrs', label: 'Operating across Asia' },
   ],
