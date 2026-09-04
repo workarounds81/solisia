@@ -102,10 +102,10 @@ export const workflow = {
 
 export const trackRecord = {
   heading: 'Track record',
-  lede: 'Solisia was incorporated in 2026. The experience behind it belongs to its principals, built over a decade of raises across Southeast Asia and beyond. Client names are withheld as a matter of course.',
+  lede: 'The experience behind Solisia belongs to its principals, built over a decade of raises across Southeast Asia and beyond. Client names are withheld as a matter of course.',
   figures: [
     { value: 'US$500M+', label: 'Raised across token, equity and asset-backed structures' },
-    { value: 'SAFT, Series A, asset-backed', label: 'Structures raised across', isText: true },
+    { value: 'Payments, Web3, ventures', label: 'Sectors advised across', isText: true },
     { value: '10 yrs', label: 'Operating across Asia' },
   ],
   items: [
@@ -127,11 +127,7 @@ export const trackRecord = {
     },
     {
       sector: 'Commodities trading venture',
-      outcome: 'US$2M raised. Investor introductions, materials and diligence support.',
-    },
-    {
-      sector: 'Food and beverage establishment, Singapore',
-      outcome: 'US$500K raised from private investors.',
+      outcome: 'Investor introductions, materials and diligence support through the raise.',
     },
   ],
 };
