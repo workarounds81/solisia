@@ -21,6 +21,13 @@ concurrency:
 jobs:
   build-publish:
     runs-on: ubuntu-latest
+    # A normal run finishes in under 30s; 5 minutes is a generous ceiling.
+    # actions/setup-node has a known bug (npm ci occasionally hangs forever
+    # rather than erroring — https://github.com/actions/setup-node/issues/1297)
+    # with no code-side fix; this timeout is what turns that from "stuck
+    # until someone notices and cancels it by hand" into "fails fast, safe
+    # to just re-run."
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
