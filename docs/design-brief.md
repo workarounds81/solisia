@@ -275,6 +275,36 @@ gives no evidence either way for the off-white token.
   headless Chromium) as fallbacks for browsers that don't support SVG
   favicons and for iOS home-screen bookmarks.
 
+- **Track Record reversed from anonymised to named, and expanded from 5
+  case studies to ~19.** `TrackRecord.jsx` previously carried "Anonymised
+  as a matter of course: sector and outcome only, never a client name" —
+  a deliberate original rule. Superseded on direct instruction: the
+  business's own principal supplied a real deal list by name, and every
+  named entry is for a *publicly listed* company's own capital raise
+  (Korean, NYSE, Indonesian, Hong Kong and Singapore exchanges) — public
+  record via that company's own filings, not confidential client
+  information, unlike the four pre-existing anonymised engagements
+  (which stay anonymised; nothing in the new list named a replacement for
+  them). `trackRecord.lede`'s "client names are withheld as a matter of
+  course" line was dropped for the same reason — it would now be false —
+  and replaced with "select transactions below; some engagements remain
+  confidential," which is still true of the four untouched entries.
+  Figure 2 ("Payments, Web3, ventures") was already stale against the new
+  list's actual spread (fishery, oil & gas, chemicals, healthcare,
+  photovoltaics, furniture, land, alongside the existing payments/Web3
+  ones) — replaced with "5 exchanges" / "Listed across," a real count
+  derived directly from the named entries rather than a vague sector
+  gloss.
+  Layout: a single full-width row per item read as an excessive scroll at
+  ~19 entries (flagged directly). `TrackRecord.jsx`'s items list moved
+  from one wide `dt`/`dd` row per deal to a two-column grid of compact
+  cards (smaller text, tighter line-height) — verified in a real browser
+  that this roughly halves the section's height on desktop without
+  crowding the two-exchange-heavy entries (Hong Kong ×4, Singapore ×2)
+  into illegibility; mobile stays single-column since two columns at
+  390px would crush company names like "Cross-border payments
+  infrastructure group."
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

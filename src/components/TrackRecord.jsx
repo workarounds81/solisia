@@ -1,6 +1,11 @@
 import { trackRecord } from '../content/site.js';
 
-/** Anonymised as a matter of course: sector and outcome only, never a client name. */
+/**
+ * Named where the deal itself is public record (a listed company's own
+ * exchange filings), sector-only where the engagement isn't — see
+ * site.js's trackRecord.items. Two-column, compact rows: with ~20
+ * entries, one full-width row per deal read as an endless scroll.
+ */
 export default function TrackRecord() {
   return (
     <section id="record" className="border-t border-dark/15 bg-light/80 text-dark">
@@ -25,14 +30,11 @@ export default function TrackRecord() {
           ))}
         </div>
 
-        <dl className="border-t border-dark/15">
+        <dl className="grid border-t border-dark/15 md:grid-cols-2 md:gap-x-12">
           {trackRecord.items.map((item) => (
-            <div
-              key={item.sector}
-              className="grid gap-1 border-b border-dark/15 py-6 md:grid-cols-[1fr_1.15fr] md:gap-14"
-            >
-              <dt className="font-display text-lg">{item.sector}</dt>
-              <dd className="text-[0.95rem] text-dark/60">{item.outcome}</dd>
+            <div key={item.sector} className="border-b border-dark/15 py-4">
+              <dt className="font-display text-sm">{item.sector}</dt>
+              <dd className="mt-1 text-xs leading-[1.5] text-dark/60">{item.outcome}</dd>
             </div>
           ))}
         </dl>

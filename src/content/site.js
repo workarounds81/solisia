@@ -102,10 +102,10 @@ export const workflow = {
 
 export const trackRecord = {
   heading: 'Track record',
-  lede: 'The experience behind Solisia belongs to its principals, built over a decade of raises across Southeast Asia and beyond. Client names are withheld as a matter of course.',
+  lede: 'The experience behind Solisia belongs to its principals, built over a decade of raises across Southeast Asia and beyond — spanning public listings and private placements. Select transactions below; some engagements remain confidential.',
   figures: [
     { value: 'US$500M+', label: 'Raised across token, equity and asset-backed structures' },
-    { value: 'Payments, Web3, ventures', label: 'Sectors advised across', isText: true },
+    { value: '5 exchanges', label: 'Listed across', isText: true },
     { value: '10 yrs', label: 'Operating across Asia' },
   ],
   items: [
@@ -127,7 +127,66 @@ export const trackRecord = {
     },
     {
       sector: 'Commodities trading venture',
-      outcome: 'Investor introductions, materials and diligence support through the raise.',
+      outcome: 'Raised US$2M. Investor introductions, materials and diligence support through the raise.',
+    },
+    {
+      sector: 'Food and beverage establishment, Singapore',
+      outcome: 'Raised US$1M from private investors.',
+    },
+    {
+      sector: 'Lightnet',
+      outcome: 'Raised US$3.1M in a Series A round.',
+    },
+    {
+      sector: 'Token issuance (SAFT)',
+      outcome: 'Raised US$5M via a sale of future tokens agreement.',
+    },
+    {
+      sector: 'China Ocean Resources',
+      outcome:
+        'Raised US$3M via equity placement. One of the largest PRC-based fishery companies, listed on the Korean stock exchange.',
+    },
+    {
+      sector: 'Contango Oil and Gas',
+      outcome: 'Raised US$20M via equity placement. Listed on the New York Stock Exchange.',
+    },
+    {
+      sector: 'Sekawan Intipratama Tbk PT',
+      outcome: 'Raised US$2M via shares financing. Listed on the Indonesian stock exchange.',
+    },
+    {
+      sector: 'TEM Holdings Ltd',
+      outcome: 'Raised US$1M via equity placement. Listed on the Hong Kong stock exchange.',
+    },
+    {
+      sector: 'Falcon Energy Ltd',
+      outcome: 'Raised S$3M via shares financing. Listed on the Singapore stock exchange.',
+    },
+    {
+      sector: 'Merry Gardens',
+      outcome:
+        'Raised US$3.5M via equity placement. One of the largest furniture manufacturers, listed on the Hong Kong stock exchange.',
+    },
+    {
+      sector: 'United Photovoltaics Group',
+      outcome: 'Raised US$6M via equity placement. Listed on the Hong Kong stock exchange.',
+    },
+    {
+      sector: 'China Zenith Chemical Group',
+      outcome: 'Raised US$1M via equity placement. Listed on the Hong Kong stock exchange.',
+    },
+    {
+      sector: 'Verita Healthcare Group',
+      outcome: 'Raised S$10M in pre-IPO funding. Private company.',
+    },
+    {
+      sector: 'Hatten Land Ltd',
+      outcome: 'Raised S$2M via shares financing. Listed on the Singapore stock exchange.',
+    },
+    {
+      sector: 'Superp',
+      outcome:
+        'Raised US$1M. Perpetual decentralised exchange offering high-leverage trading products across established, newly minted and Binance Alpha tokens.',
     },
   ],
 };
