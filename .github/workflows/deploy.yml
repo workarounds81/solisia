@@ -36,8 +36,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
+      # cache: npm (actions/setup-node's built-in ~/.npm cache restore) was
+      # dropped here: six consecutive runs hung indefinitely in this exact
+      # spot today, always right after cache restore completed, matching
+      # https://github.com/actions/setup-node/issues/1297. A restored
+      # ~/.npm cache is what that bug implicates; a completely uncached
+      # install is a few seconds slower but doesn't have anything to hang
+      # on. If this stops the hangs, the cache was the cause and it stays
+      # off; if it doesn't, this reverts and the 5-minute job timeout above
+      # is the real safety net regardless.
       - name: Install
         run: npm ci
 
