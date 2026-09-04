@@ -108,6 +108,16 @@ export const trackRecord = {
     { value: '5 exchanges', label: 'Listed across', isText: true },
     { value: '10 yrs', label: 'Operating across Asia' },
   ],
+  // Distinct from `items` below: an open, active raise rather than a closed
+  // deal, so it's rendered as its own callout rather than folded into the
+  // historical list — mixing the two would read as claiming a live raise is
+  // already done.
+  currentlyRaising: {
+    label: 'Currently raising',
+    company: 'Lightnet',
+    round: 'Late-stage pre-IPO',
+    cta: 'Enquire for details',
+  },
   items: [
     {
       sector: 'Cross-border payments infrastructure group',
@@ -130,7 +140,7 @@ export const trackRecord = {
       outcome: 'Raised US$2M. Investor introductions, materials and diligence support through the raise.',
     },
     {
-      sector: 'Food and beverage establishment, Singapore',
+      sector: 'Food and beverage establishment, Singapore and Thailand',
       outcome: 'Raised US$1M from private investors.',
     },
     {
@@ -138,8 +148,12 @@ export const trackRecord = {
       outcome: 'Raised US$3.1M in a Series A round.',
     },
     {
-      sector: 'Token issuance (SAFT)',
-      outcome: 'Raised US$5M via a sale of future tokens agreement.',
+      sector: 'Velo',
+      outcome: 'Raised US$4M via a sale of future tokens agreement (SAFT).',
+    },
+    {
+      sector: 'Evry',
+      outcome: 'Raised US$1M via a sale of future tokens agreement (SAFT).',
     },
     {
       sector: 'China Ocean Resources',
