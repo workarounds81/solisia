@@ -207,6 +207,16 @@ export const trackRecord = {
 
 export const contact = {
   heading: 'If you are raising, start early.',
+  // Investors invest directly with the company, never through Solisia —
+  // "register your mandate" rather than anything implying Solisia arranges
+  // or executes the investment itself.
+  investorHeading: 'Access curated dealflow, direct.',
+  investorPitch:
+    'We work with a network of family offices, funds and private investors across Asia. Register your mandate and we will flag relevant raises — you invest directly with the company, never through us.',
+  toggle: {
+    raising: "I'm raising",
+    investor: "I'm an investor",
+  },
   email: 'info@solisia.net',
   phone: '+65 9857 5090',
   phoneHref: '+6598575090',

@@ -329,6 +329,34 @@ gives no evidence either way for the off-white token.
   390px would crush company names like "Cross-border payments
   infrastructure group."
 
+- **Contact became a two-mode toggle: fund managers raising vs. investors
+  registering interest.** Deliberately *not* a live investor
+  portal/marketplace (no login, no deal listings, no self-serve matching) —
+  discussed directly first because a fee tied to introducing investors
+  edges toward regulated (in Singapore, CMS-licensable) activity, and a
+  self-serve platform reads as operating one in a way a lead-capture form
+  doesn't. Landed on: investors register a mandate (ticket size, sectors,
+  an accredited/institutional self-declaration checkbox) and Solisia
+  follows up manually — same posture as the existing fund-manager side,
+  just a second form. Investors invest directly with the company, never
+  through Solisia; `contact.investorPitch` says so explicitly rather than
+  leaving it implied.
+  `useContactForm.js` grew a `mode` ('raising' | 'investor'), separate
+  initial values and validation per mode (message required for raising;
+  the accredited checkbox required for investor), and `switchMode()` resets
+  values/status so stale data or an error from one mode can't leak into the
+  other. `submitContact.js` picks the email subject/body shape from
+  `values.mode` so both variants land as distinguishable emails in the same
+  inbox — no second Formspree endpoint or mailbox needed. Verified in a
+  real browser: each mode's own validation fires correctly (empty-submit,
+  and specifically submitting as investor without the accredited checkbox
+  checked), a valid submission on each mode reaches the success state, and
+  switching modes clears the previous mode's fields rather than carrying
+  them over.
+  The fund-manager side's copy was deliberately left unchanged (still "If
+  you are raising, start early.", no explicit retainer/mandate language
+  added) — a direct call, not an oversight.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

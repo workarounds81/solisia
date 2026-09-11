@@ -15,11 +15,17 @@ const rows = [
   ['Offices', contact.locations],
 ];
 
+const toggleBtn = (active) =>
+  `border px-4 py-2 text-sm transition-colors ${
+    active ? 'border-dark bg-dark text-light' : 'border-dark/25 text-dark/60 hover:border-dark/50'
+  }`;
+
 export default function Contact() {
-  const { values, status, error, handleChange, handleSubmit } = useContactForm({
+  const { mode, switchMode, values, status, error, handleChange, handleSubmit } = useContactForm({
     onSubmit: (data) => submitContact(data, { email: contact.email }),
   });
   const busy = status === 'submitting';
+  const isInvestor = mode === 'investor';
 
   return (
     <footer id="contact" className="border-t border-dark/15 bg-light/80 text-dark">
@@ -27,8 +33,9 @@ export default function Contact() {
         {/* Details */}
         <div>
           <h2 className="max-w-[15ch] text-3xl font-light leading-[1.14] tracking-[-0.015em] md:text-4xl">
-            {contact.heading}
+            {isInvestor ? contact.investorHeading : contact.heading}
           </h2>
+          {isInvestor && <p className="mt-4 max-w-[46ch] text-dark/70">{contact.investorPitch}</p>}
           <dl className="mt-10 border-t border-dark/15">
             {rows.map(([term, value]) => (
               <div
@@ -43,34 +50,95 @@ export default function Contact() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} noValidate className="space-y-8">
-          <div>
-            <label htmlFor="name" className={label}>Name</label>
-            <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={handleChange} className={field} />
-          </div>
-          <div>
-            <label htmlFor="email" className={label}>Email</label>
-            <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={handleChange} className={field} />
-          </div>
-          <div>
-            <label htmlFor="message" className={label}>Message</label>
-            <textarea id="message" name="message" rows={4} value={values.message} onChange={handleChange} className={`${field} resize-y`} />
+        <div>
+          <div role="group" aria-label="Enquiry type" className="mb-8 flex gap-2">
+            <button
+              type="button"
+              aria-pressed={!isInvestor}
+              onClick={() => switchMode('raising')}
+              className={toggleBtn(!isInvestor)}
+            >
+              {contact.toggle.raising}
+            </button>
+            <button
+              type="button"
+              aria-pressed={isInvestor}
+              onClick={() => switchMode('investor')}
+              className={toggleBtn(isInvestor)}
+            >
+              {contact.toggle.investor}
+            </button>
           </div>
 
-          <div className="flex items-center gap-6">
-            <button
-              type="submit"
-              disabled={busy}
-              className="border border-dark px-6 py-3 text-sm tracking-wide transition-colors hover:bg-dark hover:text-light disabled:opacity-50"
-            >
-              {busy ? 'Sending…' : 'Send'}
-            </button>
-            <p role="status" aria-live="polite" className="text-sm">
-              {status === 'success' && <span className="text-dark/70">Thank you — we will reply shortly.</span>}
-              {status === 'error' && <span className="text-brass">{error}</span>}
-            </p>
-          </div>
-        </form>
+          <form onSubmit={handleSubmit} noValidate className="space-y-8">
+            <div>
+              <label htmlFor="name" className={label}>Name</label>
+              <input id="name" name="name" type="text" autoComplete="name" value={values.name} onChange={handleChange} className={field} />
+            </div>
+            <div>
+              <label htmlFor="email" className={label}>Email</label>
+              <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={handleChange} className={field} />
+            </div>
+
+            {isInvestor ? (
+              <>
+                <div>
+                  <label htmlFor="ticketSize" className={label}>Typical ticket size</label>
+                  <input
+                    id="ticketSize"
+                    name="ticketSize"
+                    type="text"
+                    placeholder="e.g. US$250K–1M"
+                    value={values.ticketSize}
+                    onChange={handleChange}
+                    className={field}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="sectors" className={label}>Sectors or stage of interest</label>
+                  <input
+                    id="sectors"
+                    name="sectors"
+                    type="text"
+                    placeholder="e.g. fintech, Series A"
+                    value={values.sectors}
+                    onChange={handleChange}
+                    className={field}
+                  />
+                </div>
+                <label className="flex items-start gap-3 text-sm text-dark/70">
+                  <input
+                    type="checkbox"
+                    name="accredited"
+                    checked={values.accredited}
+                    onChange={handleChange}
+                    className="mt-1 size-4 accent-brass"
+                  />
+                  I confirm I am an accredited or institutional investor.
+                </label>
+              </>
+            ) : (
+              <div>
+                <label htmlFor="message" className={label}>Message</label>
+                <textarea id="message" name="message" rows={4} value={values.message} onChange={handleChange} className={`${field} resize-y`} />
+              </div>
+            )}
+
+            <div className="flex items-center gap-6">
+              <button
+                type="submit"
+                disabled={busy}
+                className="border border-dark px-6 py-3 text-sm tracking-wide transition-colors hover:bg-dark hover:text-light disabled:opacity-50"
+              >
+                {busy ? 'Sending…' : 'Send'}
+              </button>
+              <p role="status" aria-live="polite" className="text-sm">
+                {status === 'success' && <span className="text-dark/70">Thank you — we will reply shortly.</span>}
+                {status === 'error' && <span className="text-brass">{error}</span>}
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
 
       {/* Legal strip. From the printed card, restrained: one small mark in
