@@ -335,24 +335,28 @@ gives no evidence either way for the off-white token.
   discussed directly first because a fee tied to introducing investors
   edges toward regulated (in Singapore, CMS-licensable) activity, and a
   self-serve platform reads as operating one in a way a lead-capture form
-  doesn't. Landed on: investors register a mandate (ticket size, sectors,
-  an accredited/institutional self-declaration checkbox) and Solisia
-  follows up manually — same posture as the existing fund-manager side,
-  just a second form. Investors invest directly with the company, never
-  through Solisia; `contact.investorPitch` says so explicitly rather than
-  leaving it implied.
+  doesn't. Landed on: investors register a mandate (ticket size, sectors)
+  and Solisia follows up manually — same posture as the existing
+  fund-manager side, just a second form. Investors invest directly with the
+  company, never through Solisia; `contact.investorPitch` says so
+  explicitly rather than leaving it implied.
+  An accredited/institutional self-declaration checkbox was in the first
+  pass (a cheap, meaningful risk-reduction step given the regulatory
+  discussion above) but cut on direct instruction — ticket size and
+  sectors are both optional now, so the investor side only actually
+  requires name and email.
   `useContactForm.js` grew a `mode` ('raising' | 'investor'), separate
   initial values and validation per mode (message required for raising;
-  the accredited checkbox required for investor), and `switchMode()` resets
-  values/status so stale data or an error from one mode can't leak into the
-  other. `submitContact.js` picks the email subject/body shape from
-  `values.mode` so both variants land as distinguishable emails in the same
-  inbox — no second Formspree endpoint or mailbox needed. Verified in a
-  real browser: each mode's own validation fires correctly (empty-submit,
-  and specifically submitting as investor without the accredited checkbox
-  checked), a valid submission on each mode reaches the success state, and
-  switching modes clears the previous mode's fields rather than carrying
-  them over.
+  nothing extra required for investor beyond name/email), and
+  `switchMode()` resets values/status so stale data or an error from one
+  mode can't leak into the other. `submitContact.js` picks the email
+  subject/body shape from `values.mode` so both variants land as
+  distinguishable emails in the same inbox — no second Formspree endpoint
+  or mailbox needed. Verified in a real browser: each mode's own validation
+  fires correctly, a valid submission on each mode reaches the success
+  state (including investor mode with only name+email filled in, once the
+  checkbox was cut), and switching modes clears the previous mode's fields
+  rather than carrying them over.
   The fund-manager side's copy was deliberately left unchanged (still "If
   you are raising, start early.", no explicit retainer/mandate language
   added) — a direct call, not an oversight.

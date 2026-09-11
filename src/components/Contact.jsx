@@ -106,16 +106,6 @@ export default function Contact() {
                     className={field}
                   />
                 </div>
-                <label className="flex items-start gap-3 text-sm text-dark/70">
-                  <input
-                    type="checkbox"
-                    name="accredited"
-                    checked={values.accredited}
-                    onChange={handleChange}
-                    className="mt-1 size-4 accent-brass"
-                  />
-                  I confirm I am an accredited or institutional investor.
-                </label>
               </>
             ) : (
               <div>

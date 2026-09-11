@@ -4,7 +4,7 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const initialValuesByMode = {
   raising: { name: '', email: '', message: '' },
-  investor: { name: '', email: '', ticketSize: '', sectors: '', accredited: false },
+  investor: { name: '', email: '', ticketSize: '', sectors: '' },
 };
 
 /**
@@ -33,8 +33,8 @@ export function useContactForm({ onSubmit } = {}) {
   }
 
   function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    setValues((current) => ({ ...current, [name]: type === 'checkbox' ? checked : value }));
+    const { name, value } = event.target;
+    setValues((current) => ({ ...current, [name]: value }));
     if (status === 'error') {
       setStatus('idle');
       setError(null);
@@ -44,11 +44,7 @@ export function useContactForm({ onSubmit } = {}) {
   function validate() {
     if (!values.name.trim()) return 'Please add your name.';
     if (!EMAIL.test(values.email)) return 'Please add a valid email address.';
-    if (mode === 'raising') {
-      if (!values.message.trim()) return 'Please add a short message.';
-    } else if (!values.accredited) {
-      return 'Please confirm accredited or institutional investor status.';
-    }
+    if (mode === 'raising' && !values.message.trim()) return 'Please add a short message.';
     return null;
   }
 

@@ -29,7 +29,7 @@ export async function submitContact(values, { email }) {
   }
 
   const body = isInvestor
-    ? `Ticket size: ${fields.ticketSize || '—'}\nSectors / stage: ${fields.sectors || '—'}\nAccredited / institutional: ${fields.accredited ? 'Yes' : 'No'}\n\n— ${fields.name}\n${fields.email}`
+    ? `Ticket size: ${fields.ticketSize || '—'}\nSectors / stage: ${fields.sectors || '—'}\n\n— ${fields.name}\n${fields.email}`
     : `${fields.message}\n\n— ${fields.name}\n${fields.email}`;
   window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
