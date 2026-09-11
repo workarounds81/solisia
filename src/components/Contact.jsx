@@ -42,8 +42,8 @@ export default function Contact() {
                 key={term}
                 className="flex flex-wrap justify-between gap-6 border-b border-dark/15 py-4"
               >
-                <dt className="text-sm text-dark/60">{term}</dt>
-                <dd>{value}</dd>
+                <dt className="text-sm font-medium text-dark">{term}</dt>
+                <dd className="font-medium">{value}</dd>
               </div>
             ))}
           </dl>
