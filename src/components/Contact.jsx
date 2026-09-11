@@ -5,7 +5,7 @@ import Sunburst from './Sunburst.jsx';
 
 const field =
   'w-full border-b border-dark/25 bg-transparent py-3 text-dark placeholder:text-dark/35 focus:border-dark focus:outline-none';
-const label = 'text-xs uppercase tracking-[0.2em] text-dark/60';
+const label = 'text-xs uppercase tracking-[0.2em] text-dark font-medium';
 const link = 'border-b border-brass pb-px transition-colors hover:text-brass';
 
 const rows = [
