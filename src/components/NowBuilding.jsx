@@ -34,7 +34,12 @@ export default function NowBuilding() {
     <section id="building" className="border-t border-dark/15 bg-light/80 text-dark">
       <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <p className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-brass">
-          <span aria-hidden="true" className="size-1.5 rounded-full bg-brass" />
+          {/* "Live" indicator: a solid dot with a slow ring pulsing out of it.
+              Static for visitors who ask for reduced motion. */}
+          <span aria-hidden="true" className="relative flex size-2">
+            <span className="absolute inline-flex size-full rounded-full bg-brass opacity-75 motion-safe:animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
+            <span className="relative inline-flex size-2 rounded-full bg-brass" />
+          </span>
           {nowBuilding.kicker}
         </p>
         <h2 className="max-w-[20ch] text-4xl font-light leading-[1.1] tracking-[-0.02em] md:text-6xl">
