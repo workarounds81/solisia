@@ -461,6 +461,16 @@ gives no evidence either way for the off-white token.
   laptops are unchanged. Photo `sizes` hints gained the two new
   breakpoints so wide screens pick the sharper files.
 
+- **Frosted panels behind small text.** Small text sitting directly over
+  the rotating globe broke up as dots passed behind it (flagged on the
+  deal list, the Currently raising callout and the contact form). One
+  `panel` utility in `index.css` (rounded-sm, `dark/10` border,
+  `light/60` fill, 8px backdrop blur) is now shared by the Services rows
+  (previously `light/40`), the Currently raising callout (keeping its
+  brass left edge), every Track record deal as its own card, the contact
+  details list and the contact form. Large headings stay on the open
+  background, where the globe doesn't hurt legibility.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

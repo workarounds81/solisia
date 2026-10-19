@@ -35,7 +35,7 @@ export default function TrackRecord() {
             deals below (bigger type, brass accent, a CTA) rather than
             folded into the list as just another row, so it doesn't read
             as a completed engagement. */}
-        <div className="mb-14 border-l-2 border-brass py-1 pl-6 md:pl-8">
+        <div className="panel mb-14 border-l-2 border-l-brass px-6 py-6 md:px-8 md:py-7">
           <p className="text-xs uppercase tracking-[0.2em] text-brass">
             {trackRecord.currentlyRaising.label}
           </p>
@@ -58,11 +58,11 @@ export default function TrackRecord() {
           </ul>
         </div>
 
-        <dl className="grid border-t border-dark/15 md:grid-cols-2 md:gap-x-12">
+        <dl className="grid gap-3 md:grid-cols-2 md:gap-4">
           {trackRecord.items.map((item) => (
-            <div key={item.sector} className="border-b border-dark/15 py-4">
+            <div key={item.sector} className="panel px-5 py-4">
               <dt className="font-display text-sm">{item.sector}</dt>
-              <dd className="mt-1 text-xs leading-[1.5] text-dark/60">{item.outcome}</dd>
+              <dd className="mt-1 text-xs leading-[1.5] text-dark/70">{item.outcome}</dd>
             </div>
           ))}
         </dl>

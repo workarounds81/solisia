@@ -58,12 +58,12 @@ export default function Contact() {
           <h2 className="max-w-[15ch] text-3xl font-light leading-[1.14] tracking-[-0.015em] md:text-4xl">
             {headingFor[mode]}
           </h2>
-          {pitchFor[mode] && <p className="mt-4 max-w-[46ch] text-dark/70">{pitchFor[mode]}</p>}
-          <dl className="mt-10 border-t border-dark/15">
+          {pitchFor[mode] && <p className="mt-4 max-w-[46ch] text-dark/80">{pitchFor[mode]}</p>}
+          <dl className="panel mt-10 px-5 md:px-6">
             {rows.map(([term, value]) => (
               <div
                 key={term}
-                className="flex flex-wrap justify-between gap-6 border-b border-dark/15 py-4"
+                className="flex flex-wrap justify-between gap-6 border-b border-dark/15 py-4 last:border-b-0"
               >
                 <dt className="text-sm font-medium text-dark">{term}</dt>
                 <dd className="font-medium">{value}</dd>
@@ -73,7 +73,7 @@ export default function Contact() {
         </div>
 
         {/* Form */}
-        <div>
+        <div className="panel px-5 py-7 md:px-8 md:py-9">
           <div role="group" aria-label="Enquiry type" className="mb-8 flex flex-wrap gap-2">
             {modes.map((m) => (
               <button

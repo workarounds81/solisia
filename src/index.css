@@ -22,6 +22,12 @@
   }
 }
 
+/* Frosted surface for small text that sits over the moving globe: enough
+   fill and blur that dots passing behind don't break up the letters. */
+@utility panel {
+  @apply rounded-sm border border-dark/10 bg-light/60 backdrop-blur-sm;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

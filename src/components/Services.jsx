@@ -60,7 +60,7 @@ export default function Services() {
           {visible.map((service) => (
             <article
               key={service.id}
-              className="grid gap-2 rounded-sm border border-dark/10 bg-light/40 px-6 py-8 backdrop-blur-sm transition-colors hover:border-brass/40 md:grid-cols-[15rem_1fr] md:gap-14"
+              className="panel grid gap-2 px-6 py-8 transition-colors hover:border-brass/40 md:grid-cols-[15rem_1fr] md:gap-14"
             >
               <div>
                 <p className="mb-2 text-xs uppercase tracking-[0.2em] text-dark/45">
