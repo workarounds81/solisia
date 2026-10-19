@@ -405,6 +405,13 @@ gives no evidence either way for the off-white token.
   height so the diagonals leave each box near its inner corner. Shown
   from `lg` up only; below that it is too cramped for the lines to read,
   so it stacks as Central plus the OpCos on a brass spine.
+  Later removed. Once the sector photos landed, the same four sectors
+  appeared three times in one section (list, photos, OpCo boxes); its one
+  new idea, a shared back office, was already in the lede, and "OpCo",
+  "EBITDA · NOI" and "AP/AR" are diligence vocabulary that belongs in the
+  deck. It also made Now building the longest section, pushing the
+  advisory business down the page. Its "each business keeps its people"
+  idea is carried by the closing line instead.
   "Currently raising" now lists two entries, Solisia (HoldCo seed, CTA to
   `#deck`) first, then Lightnet. On direct instruction. Naming Solisia's
   own raise publicly is the line most likely to count as calling
