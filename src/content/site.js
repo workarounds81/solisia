@@ -48,7 +48,7 @@ export const nowBuilding = {
     },
     {
       photo: 'trades',
-      photoAlt: 'A carpenter marking timber on a workbench covered in wood shavings.',
+      photoAlt: 'A cabinetry workshop: a craftsman fitting a door to tall oak and black cabinets, panels stacked on a cart.',
       label: 'Trades',
       title: 'Renovation and fit-out',
       description: 'Held back by manual quoting, scheduling and sub-trade dispatch.',

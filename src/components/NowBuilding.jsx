@@ -40,7 +40,6 @@ export default function NowBuilding() {
                   alt={vertical.photoAlt}
                   sizes="(min-width: 1920px) 349px, (min-width: 1536px) 310px, (min-width: 1152px) 246px, (min-width: 768px) calc((100vw - 168px) / 4), (min-width: 640px) calc((100vw - 80px) / 2), calc(100vw - 48px)"
                   className="mb-5 aspect-[3/2] sm:aspect-[4/5]"
-                  imgClassName="object-[center_60%]"
                 />
               )}
               <div className="border-t border-dark/20 pt-4">
