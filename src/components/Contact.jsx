@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { contact, footer, wordmark } from '../content/site.js';
 import { useContactForm } from '../hooks/useContactForm.js';
 import { submitContact } from '../lib/submitContact.js';
@@ -20,22 +21,44 @@ const toggleBtn = (active) =>
     active ? 'border-dark bg-dark text-light' : 'border-dark/25 text-dark/60 hover:border-dark/50'
   }`;
 
+const modes = ['raising', 'investor', 'holdco'];
+const headingFor = {
+  raising: contact.heading,
+  investor: contact.investorHeading,
+  holdco: contact.holdcoHeading,
+};
+const pitchFor = { investor: contact.investorPitch, holdco: contact.holdcoPitch };
+
 export default function Contact() {
   const { mode, switchMode, values, status, error, handleChange, handleSubmit } = useContactForm({
     onSubmit: (data) => submitContact(data, { email: contact.email }),
   });
   const busy = status === 'submitting';
-  const isInvestor = mode === 'investor';
+
+  // solisia.net/#deck (the Now Building CTA, or a link sent directly)
+  // opens the form already on the deck-request mode.
+  useEffect(() => {
+    function syncFromHash() {
+      if (window.location.hash === '#deck') switchMode('holdco');
+    }
+    syncFromHash();
+    window.addEventListener('hashchange', syncFromHash);
+    return () => window.removeEventListener('hashchange', syncFromHash);
+    // switchMode only calls stable state setters; subscribing once is enough.
+  }, []);
 
   return (
     <footer id="contact" className="border-t border-dark/15 bg-light/80 text-dark">
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
+      <div
+        id="deck"
+        className="mx-auto grid max-w-6xl scroll-mt-16 gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24"
+      >
         {/* Details */}
         <div>
           <h2 className="max-w-[15ch] text-3xl font-light leading-[1.14] tracking-[-0.015em] md:text-4xl">
-            {isInvestor ? contact.investorHeading : contact.heading}
+            {headingFor[mode]}
           </h2>
-          {isInvestor && <p className="mt-4 max-w-[46ch] text-dark/70">{contact.investorPitch}</p>}
+          {pitchFor[mode] && <p className="mt-4 max-w-[46ch] text-dark/70">{pitchFor[mode]}</p>}
           <dl className="mt-10 border-t border-dark/15">
             {rows.map(([term, value]) => (
               <div
@@ -51,23 +74,18 @@ export default function Contact() {
 
         {/* Form */}
         <div>
-          <div role="group" aria-label="Enquiry type" className="mb-8 flex gap-2">
-            <button
-              type="button"
-              aria-pressed={!isInvestor}
-              onClick={() => switchMode('raising')}
-              className={toggleBtn(!isInvestor)}
-            >
-              {contact.toggle.raising}
-            </button>
-            <button
-              type="button"
-              aria-pressed={isInvestor}
-              onClick={() => switchMode('investor')}
-              className={toggleBtn(isInvestor)}
-            >
-              {contact.toggle.investor}
-            </button>
+          <div role="group" aria-label="Enquiry type" className="mb-8 flex flex-wrap gap-2">
+            {modes.map((m) => (
+              <button
+                key={m}
+                type="button"
+                aria-pressed={mode === m}
+                onClick={() => switchMode(m)}
+                className={toggleBtn(mode === m)}
+              >
+                {contact.toggle[m]}
+              </button>
+            ))}
           </div>
 
           <form onSubmit={handleSubmit} noValidate className="space-y-8">
@@ -80,7 +98,28 @@ export default function Contact() {
               <input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={handleChange} className={field} />
             </div>
 
-            {isInvestor ? (
+            {mode === 'holdco' && (
+              <>
+                <div>
+                  <label htmlFor="firm" className={label}>Firm (optional)</label>
+                  <input
+                    id="firm"
+                    name="firm"
+                    type="text"
+                    autoComplete="organization"
+                    value={values.firm}
+                    onChange={handleChange}
+                    className={field}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className={label}>Anything we should know (optional)</label>
+                  <textarea id="message" name="message" rows={3} value={values.message} onChange={handleChange} className={`${field} resize-y`} />
+                </div>
+              </>
+            )}
+
+            {mode === 'investor' && (
               <>
                 <div>
                   <label htmlFor="ticketSize" className={label}>Typical ticket size</label>
@@ -107,7 +146,9 @@ export default function Contact() {
                   />
                 </div>
               </>
-            ) : (
+            )}
+
+            {mode === 'raising' && (
               <div>
                 <label htmlFor="message" className={label}>Message</label>
                 <textarea id="message" name="message" rows={4} value={values.message} onChange={handleChange} className={`${field} resize-y`} />

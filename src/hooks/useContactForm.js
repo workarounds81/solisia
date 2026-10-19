@@ -5,6 +5,7 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const initialValuesByMode = {
   raising: { name: '', email: '', message: '' },
   investor: { name: '', email: '', ticketSize: '', sectors: '' },
+  holdco: { name: '', email: '', firm: '', message: '' },
 };
 
 /**

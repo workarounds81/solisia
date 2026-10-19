@@ -6,6 +6,7 @@
 export const wordmark = 'SOLISIA';
 
 export const nav = [
+  { href: '#building', label: 'Now building' },
   { href: '#work', label: 'What we do' },
   { href: '#engagement', label: 'Engagement' },
   { href: '#record', label: 'Track record' },
@@ -19,6 +20,45 @@ export const hero = {
   lede:
     'Solisia is an investor relations and capital advisory firm in Asia. We work with founders and fund managers across Southeast Asia on how they are positioned, who they meet, and what happens in the eighteen months after the cheque clears.',
   meta: ['Asia'],
+};
+
+/**
+ * Thesis only, drawn from the HoldCo investment deck. Raise size, valuation
+ * cap, instrument, token, yields and financials are deliberately absent:
+ * the round is a private placement, and advertising its terms publicly
+ * risks the exemption it relies on. Those stay in the deck, sent on request.
+ */
+export const nowBuilding = {
+  kicker: 'Now building',
+  headline: 'Essential businesses,',
+  headlineEmphasis: 'and the places they run from.',
+  lede:
+    'Alongside our advisory work, Solisia is building a holding company. It acquires profitable, owner-run businesses across Southeast Asia, starting in Singapore and Bangkok, and selectively the commercial and light-industrial property they trade from. One shared AI back office, Solisia Central, takes on the scheduling, sourcing, leasing and books for all of them.',
+  verticals: [
+    {
+      label: 'F&B',
+      title: 'Restaurants and kitchens',
+      description: 'High volume, heavy labour and inventory friction.',
+    },
+    {
+      label: 'Trades',
+      title: 'Renovation and fit-out',
+      description: 'Held back by manual quoting, scheduling and sub-trade dispatch.',
+    },
+    {
+      label: 'Health',
+      title: 'Clinics and wellness',
+      description: 'A heavy front-desk and admin load. Clinical decisions stay with licensed staff.',
+    },
+    {
+      label: 'Data',
+      title: 'Tech and networks',
+      description: 'Events, deal flow and media that feed leads to the group.',
+    },
+  ],
+  closing: 'The kitchen keeps cooking. The clinic keeps its doctors. The workshop keeps its craftsmen.',
+  cta: 'Request the deck',
+  note: 'Shared privately with accredited and institutional investors.',
 };
 
 /**
@@ -104,7 +144,10 @@ export const trackRecord = {
   heading: 'Track record',
   lede: 'The experience behind Solisia belongs to its principals, built over a decade of raises across Southeast Asia and beyond — spanning public listings and private placements. Select transactions below; some engagements remain confidential.',
   figures: [
-    { value: 'US$500M+', label: 'Raised across token, equity and asset-backed structures' },
+    {
+      value: 'US$500M+',
+      label: 'Raised by Solisia’s principals combined, across public placements and private rounds',
+    },
     { value: '5 exchanges', label: 'Listed across', isText: true },
     { value: '10 yrs', label: 'Operating across Asia' },
   ],
@@ -213,9 +256,13 @@ export const contact = {
   investorHeading: 'Access curated dealflow, direct.',
   investorPitch:
     'We work with a network of family offices, funds and private investors across Asia. Register your mandate and we will flag relevant raises — you invest directly with the company, never through us.',
+  holdcoHeading: 'The HoldCo deck, on request.',
+  holdcoPitch:
+    'Tell us who you are and we will send the deck. It is shared privately, with accredited and institutional investors only.',
   toggle: {
     raising: "I'm raising",
     investor: "I'm an investor",
+    holdco: 'Request the deck',
   },
   email: 'info@solisia.net',
   phone: '+65 9857 5090',
@@ -226,5 +273,5 @@ export const contact = {
 
 export const footer = {
   legal:
-    'Solisia Pte. Ltd. provides investor relations, communications and commercial advisory services. Nothing on this website is an offer to sell, or a solicitation of an offer to buy, any security or investment product, nor does it constitute investment, legal or tax advice. Solisia does not manage client assets, hold client monies, or provide any service requiring a capital markets services licence. Any investments referred to are made on the company’s own account. © 2026 Solisia Pte. Ltd.',
+    'Solisia Pte. Ltd. provides investor relations, communications and commercial advisory services. Nothing on this website is an offer to sell, or a solicitation of an offer to buy, any security or investment product, nor does it constitute investment, legal or tax advice. Solisia does not manage client assets, hold client monies, or provide any service requiring a capital markets services licence. Any investments referred to are made on the company’s own account. Information about the holding company Solisia is building is general in nature; any offer of securities will be made only to eligible investors under private offering documents, and not through this website. © 2026 Solisia Pte. Ltd.',
 };

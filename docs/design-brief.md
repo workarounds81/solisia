@@ -361,6 +361,43 @@ gives no evidence either way for the off-white token.
   you are raising, start early.", no explicit retainer/mandate language
   added) — a direct call, not an oversight.
 
+- **"Now building" section for the HoldCo, thesis only.** Source: the
+  HoldCo investment deck (v3.0). The site stays an IR/advisory site; the
+  HoldCo gets one section directly under Hero (`NowBuilding.jsx`, nav
+  link first) rather than a rewrite or a separate page. What is public:
+  the thesis (acquire owner-run essential businesses, selectively their
+  property, one AI back office "Solisia Central"), the four verticals,
+  Singapore and Bangkok as acquisition geography, and the deck's closing
+  line. What is deliberately absent: raise size, valuation cap,
+  instrument, the RWA token, yields, entry multiples, the margin gate,
+  the RTO exit path and every financial. The round is a private placement
+  and publicly advertising its terms risks the exemption it relies on, so
+  those stay in the deck, sent on request. Get the final wording
+  reviewed by counsel.
+  Light section, not dark: Hosting stays the page's only full-bleed dark
+  block. Distinguished instead by a brass kicker with a dot, a large
+  serif headline in Hero's plain + italic pattern, and the same
+  brass-left-border callout used for "Currently raising".
+  The CTA links to `#deck` (an id on Contact's grid), and Contact listens
+  for that hash on load and on `hashchange` to open the form on a third
+  mode, `holdco` (name, email, optional firm and note; subject "HoldCo
+  deck request from …"). A deck link can be sent directly as
+  `solisia.net/#deck`. The CTA re-dispatches `hashchange` when the hash
+  is already `#deck`, otherwise a second click after switching modes
+  would not switch back.
+  "Shared privately with accredited and institutional investors" appears
+  as a statement in the section and the form pitch. It is not a form
+  field: the earlier instruction to drop the accreditation checkbox
+  still stands.
+  The track-record headline figure (US$500M+) now says it is the
+  principals' combined figure across public placements and private
+  rounds. The deck's "$10M+" is Rey personally; both are true, and the
+  label now makes the scope explicit so the two don't read as a
+  contradiction.
+  Footer legal gains one sentence: HoldCo information is general, and any
+  offer of securities is made only to eligible investors under private
+  offering documents, not through the website.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

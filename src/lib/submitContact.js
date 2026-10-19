@@ -12,10 +12,10 @@
  */
 export async function submitContact(values, { email }) {
   const { mode, ...fields } = values;
-  const isInvestor = mode === 'investor';
-  const subject = isInvestor
-    ? `Investor registration from ${fields.name}`
-    : `Enquiry from ${fields.name}`;
+  const subject = {
+    investor: `Investor registration from ${fields.name}`,
+    holdco: `HoldCo deck request from ${fields.name}`,
+  }[mode] ?? `Enquiry from ${fields.name}`;
 
   const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
   if (endpoint) {
@@ -28,8 +28,10 @@ export async function submitContact(values, { email }) {
     return;
   }
 
-  const body = isInvestor
-    ? `Ticket size: ${fields.ticketSize || '—'}\nSectors / stage: ${fields.sectors || '—'}\n\n— ${fields.name}\n${fields.email}`
-    : `${fields.message}\n\n— ${fields.name}\n${fields.email}`;
+  const signature = `— ${fields.name}\n${fields.email}`;
+  const body = {
+    investor: `Ticket size: ${fields.ticketSize || '—'}\nSectors / stage: ${fields.sectors || '—'}\n\n${signature}`,
+    holdco: `Firm: ${fields.firm || '—'}\n\n${fields.message || ''}\n\n${signature}`,
+  }[mode] ?? `${fields.message}\n\n${signature}`;
   window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
