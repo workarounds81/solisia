@@ -116,5 +116,14 @@ jobs:
             echo "No changes to publish for $LABEL."
           else
             git commit -q -m "Publish $LABEL: ${GITHUB_SHA::7}"
-            git push "$REMOTE" gh-pages
+            # The per-branch concurrency groups let a preview and a
+            # production publish run at once; whichever pushes second is
+            # rejected. They write disjoint paths (root vs. preview/), so
+            # rebasing onto the other's commit is always clean.
+            for attempt in 1 2 3; do
+              if git push "$REMOTE" gh-pages; then exit 0; fi
+              echo "gh-pages moved during publish (attempt $attempt); rebasing and retrying."
+              git pull --rebase -q "$REMOTE" gh-pages
+            done
+            exit 1
           fi
