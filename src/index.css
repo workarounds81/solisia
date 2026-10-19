@@ -94,5 +94,33 @@
       transform: none;
     }
   }
+
+  /* Rings rippling out of the Now building dot. The ring grows by animating
+     its inset rather than scaling it, so the stroke stays hairline instead
+     of thickening as it expands. Stagger with animation-delay. */
+  .ripple {
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid var(--color-brass);
+    border-radius: 9999px;
+    opacity: 0;
+    pointer-events: none;
+    animation: ripple 2.4s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+  }
+  @keyframes ripple {
+    from {
+      inset: 0;
+      opacity: 0.8;
+    }
+    to {
+      inset: -2.25rem;
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ripple {
+      display: none;
+    }
+  }
 }
 

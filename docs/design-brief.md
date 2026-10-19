@@ -471,6 +471,14 @@ gives no evidence either way for the off-white token.
   details list and the contact form. Large headings stay on the open
   background, where the globe doesn't hurt legibility.
 
+- **Now building kicker: larger, with ripples.** On direct instruction
+  the kicker doubled to 24px (`text-2xl`) with a 16px dot, an exception
+  to "brass never for large text", kept to that one label. Three
+  hairline brass rings ripple out of the dot on a 2.4s loop, staggered
+  0.8s apart, and may pass over the word. They grow by animating `inset`
+  rather than `scale` so the stroke stays 1.5px. Under
+  prefers-reduced-motion only the static dot shows.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.
