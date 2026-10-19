@@ -1,7 +1,11 @@
 import { nowBuilding } from '../content/site.js';
 import { requestDeck } from '../lib/requestDeck.js';
+import Photo, { hasPhoto } from './Photo.jsx';
 
 const { architecture } = nowBuilding;
+
+// All four or none: a row with one missing photo reads as broken.
+const showVerticalPhotos = nowBuilding.verticals.every((v) => hasPhoto(v.photo));
 
 function OpcoBox({ opco }) {
   return (
@@ -38,12 +42,31 @@ export default function NowBuilding() {
         </h2>
         <p className="mt-8 max-w-[60ch] text-lg leading-[1.7] text-dark/80">{nowBuilding.lede}</p>
 
+        <Photo
+          name={nowBuilding.photo.name}
+          alt={nowBuilding.photo.alt}
+          sizes="(min-width: 1152px) 1104px, calc(100vw - 48px)"
+          className="mt-12 aspect-[3/2] md:aspect-[21/9]"
+          imgClassName="object-[center_30%]"
+        />
+
         <ul className="mt-12 grid gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10">
           {nowBuilding.verticals.map((vertical) => (
-            <li key={vertical.label} className="border-t border-dark/20 pt-4">
-              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-brass">{vertical.label}</p>
-              <h3 className="text-xl leading-snug">{vertical.title}</h3>
-              <p className="mt-2 text-[0.95rem] text-dark/75">{vertical.description}</p>
+            <li key={vertical.label}>
+              {showVerticalPhotos && (
+                <Photo
+                  name={vertical.photo}
+                  alt={vertical.photoAlt}
+                  sizes="(min-width: 1152px) 246px, (min-width: 768px) calc((100vw - 168px) / 4), (min-width: 640px) calc((100vw - 80px) / 2), calc(100vw - 48px)"
+                  className="mb-5 aspect-[3/2] sm:aspect-[4/5]"
+                  imgClassName="object-[center_60%]"
+                />
+              )}
+              <div className="border-t border-dark/20 pt-4">
+                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-brass">{vertical.label}</p>
+                <h3 className="text-xl leading-snug">{vertical.title}</h3>
+                <p className="mt-2 text-[0.95rem] text-dark/75">{vertical.description}</p>
+              </div>
             </li>
           ))}
         </ul>

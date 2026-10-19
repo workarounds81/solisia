@@ -411,6 +411,29 @@ gives no evidence either way for the off-white token.
   attention to a private offer, so it carries no amount, cap or
   instrument; counsel review should cover this line specifically.
 
+- **Photography.** The site was all words; seven AI-generated photographs
+  were commissioned to one shared style line (editorial documentary,
+  natural light, near-black / off-white / one brass accent, no text, no
+  faces to camera). Deliberately none in Hero (the globe is the hero
+  visual), Engagement, Track record or Contact.
+  Pipeline: originals are never committed. Each is resized once with
+  sharp into AVIF (q50) + WebP (q72) at a few widths into
+  `src/assets/images/`, with `manifest.json` recording widths, intrinsic
+  size and the image's average colour. `Photo.jsx` imports the variants
+  through `import.meta.glob` (hashed, base-path aware for `/preview/`),
+  serves `<picture>` with AVIF first, lazy-loads, reserves the box with
+  `width`/`height` + an aspect class, paints the box in the average
+  colour, and fades the image in on load, so nothing pops or shifts.
+  Width steps are chosen so a 3× phone gets roughly 2× pixels, not 3×:
+  street 640/1120/1536, portraits 400/700. Measured fetches: desktop 1×
+  about 100 KB for the whole section, iPhone 13 about 135 KB, 2× desktop
+  about 180 KB.
+  Placement: the street scene sits full-width under the Now building
+  lede (3:2 on phones, 21:9 from md up, focal point 30% from the top).
+  The four sector photos sit above each vertical (3:2 on phones, 4:5
+  from sm up) but render only when all four exist in the manifest: a row
+  with one gap reads as broken.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

@@ -1,0 +1,39 @@
+{
+  "street": {
+    "widths": [
+      640,
+      1120,
+      1536
+    ],
+    "width": 1536,
+    "height": 1024,
+    "color": "#594d40"
+  },
+  "fnb": {
+    "widths": [
+      400,
+      700
+    ],
+    "width": 1024,
+    "height": 1536,
+    "color": "#5e472f"
+  },
+  "trades": {
+    "widths": [
+      400,
+      700
+    ],
+    "width": 1024,
+    "height": 1536,
+    "color": "#5f4734"
+  },
+  "health": {
+    "widths": [
+      400,
+      700
+    ],
+    "width": 1024,
+    "height": 1536,
+    "color": "#a1856a"
+  }
+}

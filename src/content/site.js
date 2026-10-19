@@ -34,23 +34,35 @@ export const nowBuilding = {
   headlineEmphasis: 'and the places they run from.',
   lede:
     'Alongside our advisory work, Solisia is building a holding company. It acquires profitable, owner-run businesses across Southeast Asia, starting in Singapore and Bangkok, and selectively the commercial and light-industrial property they trade from. One shared AI back office, Solisia Central, takes on the scheduling, sourcing, leasing and books for all of them.',
+  photo: {
+    name: 'street',
+    alt: 'A row of shophouses opening in the early morning: a kitchen, a clinic and a renovation workshop.',
+  },
   verticals: [
     {
+      photo: 'fnb',
+      photoAlt: 'A chef plating a dish under a brass lamp in a busy restaurant kitchen.',
       label: 'F&B',
       title: 'Restaurants and kitchens',
       description: 'High volume, heavy labour and inventory friction.',
     },
     {
+      photo: 'trades',
+      photoAlt: 'A carpenter marking timber on a workbench covered in wood shavings.',
       label: 'Trades',
       title: 'Renovation and fit-out',
       description: 'Held back by manual quoting, scheduling and sub-trade dispatch.',
     },
     {
+      photo: 'health',
+      photoAlt: 'A calm clinic reception with a stone counter and a booking tablet.',
       label: 'Health',
       title: 'Clinics and wellness',
       description: 'A heavy front-desk and admin load. Clinical decisions stay with licensed staff.',
     },
     {
+      photo: 'data',
+      photoAlt: 'A desk at dusk with a laptop showing a network of gold points, a city lit up behind.',
       label: 'Data',
       title: 'Tech and networks',
       description: 'Events, deal flow and media that feed leads to the group.',
