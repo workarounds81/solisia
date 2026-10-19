@@ -99,6 +99,10 @@ export const serviceCategories = [
 export const services = {
   heading: 'Four things, done properly',
   lede: 'We are not a placement agent and we are not a marketing shop. We sit between the two, and we stay after the raise closes.',
+  photo: {
+    name: 'flatlay',
+    alt: 'Printed investor materials, a fountain pen and a coffee laid out on a dark wooden desk.',
+  },
   items: [
     {
       id: 'investor-relations',
@@ -137,6 +141,11 @@ export const services = {
  * are worth the table.") and brass rule are omitted to honour the constraint.
  */
 export const hosting = {
+  // Background only, under a dark scrim: the section is still one paragraph.
+  photo: {
+    name: 'dinner',
+    alt: '',
+  },
   paragraph:
     'We host private dinners and small gatherings for investors across Asia, drawn from our own network of venues and rooms. They are not events. There is no deck, no lectern, no name badges. Six to fourteen people who ought to know each other, in a room where the conversation can be unguarded. More of our clients’ relationships have started at those tables than in any meeting room, which is why we treat hosting as a discipline rather than a courtesy.',
 };

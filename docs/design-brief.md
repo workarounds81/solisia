@@ -433,6 +433,15 @@ gives no evidence either way for the off-white token.
   The four sector photos sit above each vertical (3:2 on phones, 4:5
   from sm up) but render only when all four exist in the manifest: a row
   with one gap reads as broken.
+  The flat-lay sits beside the Services heading and lede (two columns
+  from md up, bottoms aligned; below the lede on phones). The dinner is a
+  full-bleed background to Hosting under a `dark/75` scrim with an empty
+  alt: texture, not content. This relaxes the "one paragraph and nothing
+  else" rule in letter only; the reader still meets one paragraph, and
+  the section's background went from translucent `dark/80` to solid
+  `dark` behind the photo.
+  Whole-page photo weight measured: about 170 KB on desktop, 230 KB on an
+  iPhone 13, all lazy, none above the fold.
 
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`

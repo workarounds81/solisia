@@ -35,5 +35,33 @@
     "width": 1024,
     "height": 1536,
     "color": "#a1856a"
+  },
+  "data": {
+    "widths": [
+      400,
+      700
+    ],
+    "width": 1024,
+    "height": 1536,
+    "color": "#2f2620"
+  },
+  "flatlay": {
+    "widths": [
+      480,
+      800
+    ],
+    "width": 1536,
+    "height": 1024,
+    "color": "#695b4f"
+  },
+  "dinner": {
+    "widths": [
+      640,
+      1120,
+      1536
+    ],
+    "width": 1536,
+    "height": 1024,
+    "color": "#2f1c0c"
   }
 }
