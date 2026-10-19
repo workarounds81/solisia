@@ -397,6 +397,19 @@ gives no evidence either way for the off-white token.
   Footer legal gains one sentence: HoldCo information is general, and any
   offer of securities is made only to eligible investors under private
   offering documents, not through the website.
+  Follow-up: the deck's "Corporate architecture" slide is rebuilt in
+  HTML inside the section, after the verticals and before the CTA, with
+  Solisia Central in a dark centre box, four OpCo boxes at the corners,
+  and brass connectors. The connectors are just the container's two
+  diagonals drawn behind solid boxes; gaps are 40% of width and 12rem of
+  height so the diagonals leave each box near its inner corner. Shown
+  from `lg` up only; below that it is too cramped for the lines to read,
+  so it stacks as Central plus the OpCos on a brass spine.
+  "Currently raising" now lists two entries, Solisia (HoldCo seed, CTA to
+  `#deck`) first, then Lightnet. On direct instruction. Naming Solisia's
+  own raise publicly is the line most likely to count as calling
+  attention to a private offer, so it carries no amount, cap or
+  instrument; counsel review should cover this line specifically.
 
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`

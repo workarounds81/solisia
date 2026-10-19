@@ -56,6 +56,19 @@ export const nowBuilding = {
       description: 'Events, deal flow and media that feed leads to the group.',
     },
   ],
+  architecture: {
+    kicker: 'Corporate architecture',
+    headline: 'Local companies,',
+    headlineEmphasis: 'shared intelligence.',
+    lede: 'Each business keeps its brand, its licences and its people. Bookings, sourcing, leasing and the books move up to Solisia Central.',
+    centre: { title: 'Solisia Central', caption: 'EBITDA · NOI' },
+    opcos: [
+      { label: 'OpCo 1 · F&B', lines: ['Keeps brand & menu.', 'AI sourcing, automated rostering.'] },
+      { label: 'OpCo 2 · Trades', lines: ['Keeps trade licences.', 'AI quoting, automated dispatch.'] },
+      { label: 'OpCo 3 · Health', lines: ['Keeps clinical staff.', 'AI booking, automated AP/AR.'] },
+      { label: 'OpCo 4 · Data', lines: ['Cross-vertical lead gen.', 'Aggregation, distribution.'] },
+    ],
+  },
   closing: 'The kitchen keeps cooking. The clinic keeps its doctors. The workshop keeps its craftsmen.',
   cta: 'Request the deck',
   note: 'Shared privately with accredited and institutional investors.',
@@ -155,11 +168,14 @@ export const trackRecord = {
   // deal, so it's rendered as its own callout rather than folded into the
   // historical list — mixing the two would read as claiming a live raise is
   // already done.
+  // Solisia's own entry carries no amount, cap or instrument: naming the
+  // raise publicly is already the riskiest line on the site (see brief).
   currentlyRaising: {
     label: 'Currently raising',
-    company: 'Lightnet',
-    round: 'Late-stage pre-IPO',
-    cta: 'Enquire for details',
+    items: [
+      { company: 'Solisia', round: 'HoldCo seed', cta: 'Request the deck', href: '#deck' },
+      { company: 'Lightnet', round: 'Late-stage pre-IPO', cta: 'Enquire for details', href: '#contact' },
+    ],
   },
   items: [
     {

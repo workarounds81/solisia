@@ -1,4 +1,5 @@
 import { trackRecord } from '../content/site.js';
+import { requestDeck } from '../lib/requestDeck.js';
 
 /**
  * Named where the deal itself is public record (a listed company's own
@@ -38,16 +39,23 @@ export default function TrackRecord() {
           <p className="text-xs uppercase tracking-[0.2em] text-brass">
             {trackRecord.currentlyRaising.label}
           </p>
-          <p className="mt-2 font-display text-2xl leading-tight md:text-3xl">
-            {trackRecord.currentlyRaising.company}
-            <span className="text-dark/60"> — {trackRecord.currentlyRaising.round}</span>
-          </p>
-          <a
-            href="#contact"
-            className="mt-3 inline-block border-b border-brass pb-px text-sm transition-colors hover:text-brass"
-          >
-            {trackRecord.currentlyRaising.cta} →
-          </a>
+          <ul className="mt-2 space-y-6">
+            {trackRecord.currentlyRaising.items.map((item) => (
+              <li key={item.company}>
+                <p className="font-display text-2xl leading-tight md:text-3xl">
+                  {item.company}
+                  <span className="text-dark/60"> — {item.round}</span>
+                </p>
+                <a
+                  href={item.href}
+                  onClick={item.href === '#deck' ? requestDeck : undefined}
+                  className="mt-3 inline-block border-b border-brass pb-px text-sm transition-colors hover:text-brass"
+                >
+                  {item.cta} →
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <dl className="grid border-t border-dark/15 md:grid-cols-2 md:gap-x-12">
