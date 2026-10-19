@@ -51,7 +51,7 @@ export default function Contact() {
     <footer id="contact" className="border-t border-dark/15 bg-light/80 text-dark">
       <div
         id="deck"
-        className="mx-auto grid max-w-6xl scroll-mt-16 gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24"
+        className="mx-auto grid max-w-site scroll-mt-16 gap-12 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24"
       >
         {/* Details */}
         <div>
@@ -177,7 +177,7 @@ export default function Contact() {
           separate "no decoration" rule untouched. */}
       <div className="relative overflow-hidden bg-dark/85 text-light/60">
         <Sunburst className="pointer-events-none absolute right-0 bottom-0 h-40 w-40 text-brass/50 md:h-56 md:w-56" />
-        <div className="relative mx-auto grid max-w-6xl gap-8 px-6 py-12">
+        <div className="relative mx-auto grid max-w-site gap-8 px-6 py-12">
           <span className="font-display text-xl tracking-[0.18em] text-light">{wordmark}</span>
           <p className="max-w-[74ch] border-t border-light/20 pt-6 text-sm leading-[1.7]">
             {footer.legal}

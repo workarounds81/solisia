@@ -450,6 +450,17 @@ gives no evidence either way for the off-white token.
   Whole-page photo weight measured: about 170 KB on desktop, 230 KB on an
   iPhone 13, all lazy, none above the fold.
 
+- **Wider column on large desktops.** On a 2560px monitor at 100% zoom
+  the fixed 72rem column filled 43% of the screen and read as squeezed.
+  Every section now uses `max-w-site` (defined once in `index.css`):
+  72rem as before up to 1535px, 88rem from 1536px. From 1920px the root
+  font size also steps to 112.5%, scaling type and spacing with it, so
+  the column reaches about 1584px (about 62% of a 2560px screen).
+  Measures stay in `ch`, so paragraphs remain readable; the extra room
+  goes to grids, photos and the two-column layouts. Phones, tablets and
+  laptops are unchanged. Photo `sizes` hints gained the two new
+  breakpoints so wide screens pick the sharper files.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

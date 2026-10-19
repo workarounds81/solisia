@@ -9,7 +9,7 @@ import { nav, wordmark } from '../content/site.js';
 export default function Masthead() {
   return (
     <header className="sticky top-0 z-40 h-16 border-b border-light/15 bg-dark/92 text-light backdrop-blur-sm">
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-8 px-6">
+      <div className="mx-auto flex h-full max-w-site items-center justify-between gap-8 px-6">
         <a href="#top" className="font-display text-2xl leading-none tracking-[0.18em]">
           {wordmark}
         </a>

@@ -10,7 +10,7 @@ import { requestDeck } from '../lib/requestDeck.js';
 export default function TrackRecord() {
   return (
     <section id="record" className="border-t border-dark/15 bg-light/80 text-dark">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-site px-6 py-16 md:py-24">
         <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
           {trackRecord.heading}
         </h2>
@@ -26,7 +26,7 @@ export default function TrackRecord() {
               >
                 {figure.value}
               </p>
-              <p className="mt-2 max-w-[22ch] text-sm text-dark/60">{figure.label}</p>
+              <p className="mt-2 max-w-[30ch] text-sm text-dark/60">{figure.label}</p>
             </div>
           ))}
         </div>

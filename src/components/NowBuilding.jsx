@@ -8,7 +8,7 @@ const showVerticalPhotos = nowBuilding.verticals.every((v) => hasPhoto(v.photo))
 export default function NowBuilding() {
   return (
     <section id="building" className="border-t border-dark/15 bg-light/80 text-dark">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-site px-6 py-16 md:py-24">
         <p className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-brass">
           {/* "Live" indicator: a solid dot with a slow ring pulsing out of it.
               Static for visitors who ask for reduced motion. */}
@@ -26,7 +26,7 @@ export default function NowBuilding() {
         <Photo
           name={nowBuilding.photo.name}
           alt={nowBuilding.photo.alt}
-          sizes="(min-width: 1152px) 1104px, calc(100vw - 48px)"
+          sizes="(min-width: 1920px) 1530px, (min-width: 1536px) 1360px, (min-width: 1152px) 1104px, calc(100vw - 48px)"
           className="mt-12 aspect-[3/2] md:aspect-[21/9]"
           imgClassName="object-[center_30%]"
         />
@@ -38,7 +38,7 @@ export default function NowBuilding() {
                 <Photo
                   name={vertical.photo}
                   alt={vertical.photoAlt}
-                  sizes="(min-width: 1152px) 246px, (min-width: 768px) calc((100vw - 168px) / 4), (min-width: 640px) calc((100vw - 80px) / 2), calc(100vw - 48px)"
+                  sizes="(min-width: 1920px) 349px, (min-width: 1536px) 310px, (min-width: 1152px) 246px, (min-width: 768px) calc((100vw - 168px) / 4), (min-width: 640px) calc((100vw - 80px) / 2), calc(100vw - 48px)"
                   className="mb-5 aspect-[3/2] sm:aspect-[4/5]"
                   imgClassName="object-[center_60%]"
                 />

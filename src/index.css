@@ -13,9 +13,26 @@
   --font-body: 'Instrument Sans', system-ui, -apple-system, sans-serif;
 }
 
+/* Page column. Unchanged (72rem) through laptops; widens on large desktop
+   monitors, where 72rem left the content as a narrow strip. */
+@utility max-w-site {
+  max-width: 72rem;
+  @media (min-width: 96rem) {
+    max-width: 88rem;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Very wide screens (1440p/4K at 100% zoom): scale type and spacing up a
+     step so the page doesn't read as tiny. Phones and laptops unaffected. */
+  @media (min-width: 120rem) {
+    html {
+      font-size: 112.5%;
+    }
   }
 
   body {

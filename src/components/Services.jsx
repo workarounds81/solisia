@@ -17,7 +17,7 @@ export default function Services() {
       <div className="sticky top-16 z-30 border-b border-dark/15 bg-light/70 backdrop-blur-sm">
         <nav
           aria-label="Filter services"
-          className="mx-auto flex max-w-6xl gap-8 overflow-x-auto px-6 py-3"
+          className="mx-auto flex max-w-site gap-8 overflow-x-auto px-6 py-3"
         >
           {filters.map((filter) => {
             const isActive = filter.id === active;
@@ -38,7 +38,7 @@ export default function Services() {
         </nav>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="mx-auto max-w-site px-6 py-16 md:py-24">
         <div className="mb-11 grid gap-10 md:grid-cols-2 md:items-end md:gap-14">
           <div>
             <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
@@ -49,7 +49,7 @@ export default function Services() {
           <Photo
             name={services.photo.name}
             alt={services.photo.alt}
-            sizes="(min-width: 1152px) 525px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
+            sizes="(min-width: 1920px) 733px, (min-width: 1536px) 652px, (min-width: 1152px) 525px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
             className="aspect-[3/2]"
           />
         </div>
