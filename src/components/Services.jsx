@@ -1,50 +1,16 @@
-import { useState } from 'react';
-import { services, serviceCategories } from '../content/site.js';
+import { services } from '../content/site.js';
 import Photo from './Photo.jsx';
 
-const ALL = { id: 'all', label: 'All' };
-
 export default function Services() {
-  const [active, setActive] = useState(ALL.id);
-  const filters = [ALL, ...serviceCategories];
-  const labelFor = (id) => serviceCategories.find((c) => c.id === id)?.label ?? '';
-  const visible =
-    active === ALL.id ? services.items : services.items.filter((s) => s.category === active);
-
   return (
     <section id="work" className="border-t border-dark/15 bg-light/80 text-dark">
-      {/* Sticky category filter sub-header, flush beneath the masthead */}
-      <div className="sticky top-16 z-30 border-b border-dark/15 bg-light/70 backdrop-blur-sm">
-        <nav
-          aria-label="Filter services"
-          className="mx-auto flex max-w-site gap-8 overflow-x-auto px-6 py-3"
-        >
-          {filters.map((filter) => {
-            const isActive = filter.id === active;
-            return (
-              <button
-                key={filter.id}
-                type="button"
-                onClick={() => setActive(filter.id)}
-                aria-pressed={isActive}
-                className={`whitespace-nowrap text-sm tracking-wide transition-colors ${
-                  isActive ? 'text-brass' : 'text-dark/50 hover:text-dark'
-                }`}
-              >
-                {filter.label}
-              </button>
-            );
-          })}
-        </nav>
-      </div>
-
       <div className="mx-auto max-w-site px-6 py-16 md:py-24">
-        <div className="mb-11 grid gap-10 md:grid-cols-2 md:items-end md:gap-14">
+        <div className="grid gap-10 md:grid-cols-2 md:items-end md:gap-14">
           <div>
-            <h2 className="mb-10 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
+            <h2 className="mb-6 max-w-[24ch] text-3xl leading-[1.15] tracking-[-0.01em] md:text-4xl">
               {services.heading}
             </h2>
-            <p className="max-w-[56ch] text-dark/80">{services.lede}</p>
+            <p className="max-w-[56ch] text-lg text-dark/80">{services.lede}</p>
           </div>
           <Photo
             name={services.photo.name}
@@ -52,25 +18,6 @@ export default function Services() {
             sizes="(min-width: 1920px) 733px, (min-width: 1536px) 652px, (min-width: 1152px) 525px, (min-width: 768px) calc((100vw - 104px) / 2), calc(100vw - 48px)"
             className="aspect-[3/2]"
           />
-        </div>
-
-        {/* Restrained glass panels: still row-shaped per the prototype, now
-            with a soft frosted surface rather than a flat divider list. */}
-        <div className="space-y-4">
-          {visible.map((service) => (
-            <article
-              key={service.id}
-              className="panel grid gap-2 px-6 py-8 transition-colors hover:border-brass/40 md:grid-cols-[15rem_1fr] md:gap-14"
-            >
-              <div>
-                <p className="mb-2 text-xs uppercase tracking-[0.2em] text-dark/45">
-                  {labelFor(service.category)}
-                </p>
-                <h3 className="text-2xl leading-[1.25]">{service.title}</h3>
-              </div>
-              <p className="max-w-[58ch] text-dark/80">{service.description}</p>
-            </article>
-          ))}
         </div>
       </div>
     </section>

@@ -64,53 +64,13 @@ export const nowBuilding = {
   note: 'Shared privately with accredited and institutional investors.',
 };
 
-/**
- * Filter categories reuse the engagement sequence's own vocabulary
- * (Position → Introduce → Sustain) rather than inventing new terms.
- */
-export const serviceCategories = [
-  { id: 'position', label: 'Position' },
-  { id: 'introduce', label: 'Introduce' },
-  { id: 'sustain', label: 'Sustain' },
-];
-
 export const services = {
-  heading: 'Four things, done properly',
-  lede: 'We are not a placement agent and we are not a marketing shop. We sit between the two, and we stay after the raise closes.',
+  heading: 'We are not a placement agent and we are not a marketing shop.',
+  lede: 'We sit between the two, and we stay after the raise closes.',
   photo: {
     name: 'flatlay',
     alt: 'Printed investor materials, a fountain pen and a coffee laid out on a dark wooden desk.',
   },
-  items: [
-    {
-      id: 'investor-relations',
-      category: 'sustain',
-      title: 'Investor relations',
-      description:
-        'Reporting cadence, quarterly updates, the awkward conversations, and the register kept warm between rounds. Most founders build this function late and badly. It is the part we care about most.',
-    },
-    {
-      id: 'capital-introduction',
-      category: 'introduce',
-      title: 'Capital introduction',
-      description:
-        'Targeted introductions to family offices, funds and private investors across Asia — screened for mandate and ticket size before anyone’s time is spent.',
-    },
-    {
-      id: 'positioning',
-      category: 'position',
-      title: 'Positioning and materials',
-      description:
-        'Narrative, deck, one-pager, FAQ, diligence questionnaire, data room. Written to survive scrutiny rather than to win a first meeting.',
-    },
-    {
-      id: 'advisory',
-      category: 'position',
-      title: 'Advisory',
-      description:
-        'Commercial structuring of the offer itself: terms, economics, how the product is put in front of the market. We occasionally take small positions on our own account in deals we advise.',
-    },
-  ],
 };
 
 /**

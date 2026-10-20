@@ -491,6 +491,16 @@ gives no evidence either way for the off-white token.
   lede, Services and the footer. Entries above that mention the hero
   describe the site before this change.
 
+- **Service rows removed.** On direct instruction the four Services rows
+  (Investor relations, Capital introduction, Positioning and materials,
+  Advisory) are gone. The Position / Introduce / Sustain filter bar
+  existed only to filter them, so it went too, along with
+  `serviceCategories`. "Four things, done properly" no longer counted
+  anything, so the section's existing lede was split rather than new
+  copy written: "We are not a placement agent and we are not a marketing
+  shop." is now the heading and "We sit between the two, and we stay
+  after the raise closes." the line under it, beside the flat-lay photo.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.
