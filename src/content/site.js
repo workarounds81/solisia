@@ -133,7 +133,6 @@ export const trackRecord = {
     label: 'Currently raising',
     items: [
       { company: 'Solisia', round: 'HoldCo seed', cta: 'Request the deck', href: '#deck' },
-      { company: 'Lightnet', round: 'Late-stage pre-IPO', cta: 'Enquire for details', href: '#contact' },
     ],
   },
   items: [
