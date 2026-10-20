@@ -73,21 +73,6 @@ export const services = {
   },
 };
 
-/**
- * The brief mandates a single paragraph with no decoration here. The
- * prototype's three paragraphs are joined verbatim; its heading ("Some rooms
- * are worth the table.") and brass rule are omitted to honour the constraint.
- */
-export const hosting = {
-  // Background only, under a dark scrim: the section is still one paragraph.
-  photo: {
-    name: 'dinner',
-    alt: '',
-  },
-  paragraph:
-    'We host private dinners and small gatherings for investors across Asia, drawn from our own network of venues and rooms. They are not events. There is no deck, no lectern, no name badges. Six to fourteen people who ought to know each other, in a room where the conversation can be unguarded. More of our clients’ relationships have started at those tables than in any meeting room, which is why we treat hosting as a discipline rather than a courtesy.',
-};
-
 export const workflow = {
   heading: 'How an engagement runs',
   steps: [
@@ -223,7 +208,6 @@ export const trackRecord = {
 };
 
 export const contact = {
-  heading: 'If you are raising, start early.',
   // Investors invest directly with the company, never through Solisia —
   // "register your mandate" rather than anything implying Solisia arranges
   // or executes the investment itself.
@@ -234,7 +218,6 @@ export const contact = {
   holdcoPitch:
     'Tell us who you are and we will send the deck. It is shared privately, with accredited and institutional investors only.',
   toggle: {
-    raising: "I'm raising",
     investor: "I'm an investor",
     holdco: 'Request the deck',
   },

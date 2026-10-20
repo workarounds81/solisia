@@ -46,7 +46,7 @@
     font-feature-settings: 'kern' 1;
   }
 
-  /* Weight is set per component: 300 for Now building/hosting/contact, 400 elsewhere. */
+  /* Weight is set per component: 300 for Now building/contact, 400 elsewhere. */
   h1,
   h2,
   h3 {

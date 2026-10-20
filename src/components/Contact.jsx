@@ -21,9 +21,8 @@ const toggleBtn = (active) =>
     active ? 'border-dark bg-dark text-light' : 'border-dark/25 text-dark/60 hover:border-dark/50'
   }`;
 
-const modes = ['raising', 'investor', 'holdco'];
+const modes = ['investor', 'holdco'];
 const headingFor = {
-  raising: contact.heading,
   investor: contact.investorHeading,
   holdco: contact.holdcoHeading,
 };
@@ -148,13 +147,6 @@ export default function Contact() {
               </>
             )}
 
-            {mode === 'raising' && (
-              <div>
-                <label htmlFor="message" className={label}>Message</label>
-                <textarea id="message" name="message" rows={4} value={values.message} onChange={handleChange} className={`${field} resize-y`} />
-              </div>
-            )}
-
             <div className="flex items-center gap-6">
               <button
                 type="submit"
@@ -173,8 +165,7 @@ export default function Contact() {
       </div>
 
       {/* Legal strip. From the printed card, restrained: one small mark in
-          one corner, not a repeating pattern — Hosting keeps its own
-          separate "no decoration" rule untouched. */}
+          one corner, not a repeating pattern. */}
       <div className="relative overflow-hidden bg-dark/85 text-light/60">
         <Sunburst className="pointer-events-none absolute right-0 bottom-0 h-40 w-40 text-brass/50 md:h-56 md:w-56" />
         <div className="relative mx-auto grid max-w-site gap-8 px-6 py-12">

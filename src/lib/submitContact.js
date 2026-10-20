@@ -6,7 +6,7 @@
  * client with the message pre-filled — no backend required, so the form works
  * on GitHub Pages out of the box.
  *
- * `values.mode` ('raising' | 'investor') picks the subject/body shape so the
+ * `values.mode` ('investor' | 'holdco') picks the subject/body shape so the
  * two form variants land as distinguishable emails in the same inbox, rather
  * than needing a second endpoint or mailbox.
  */
@@ -15,7 +15,7 @@ export async function submitContact(values, { email }) {
   const subject = {
     investor: `Investor registration from ${fields.name}`,
     holdco: `HoldCo deck request from ${fields.name}`,
-  }[mode] ?? `Enquiry from ${fields.name}`;
+  }[mode];
 
   const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT;
   if (endpoint) {
@@ -32,6 +32,6 @@ export async function submitContact(values, { email }) {
   const body = {
     investor: `Ticket size: ${fields.ticketSize || '—'}\nSectors / stage: ${fields.sectors || '—'}\n\n${signature}`,
     holdco: `Firm: ${fields.firm || '—'}\n\n${fields.message || ''}\n\n${signature}`,
-  }[mode] ?? `${fields.message}\n\n${signature}`;
+  }[mode];
   window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

@@ -53,15 +53,5 @@
     "width": 1536,
     "height": 1024,
     "color": "#695b4f"
-  },
-  "dinner": {
-    "widths": [
-      640,
-      1120,
-      1536
-    ],
-    "width": 1536,
-    "height": 1024,
-    "color": "#2f1c0c"
   }
 }

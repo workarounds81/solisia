@@ -501,6 +501,17 @@ gives no evidence either way for the off-white token.
   shop." is now the heading and "We sit between the two, and we stay
   after the raise closes." the line under it, beside the flat-lay photo.
 
+- **Hosting and the "raising" contact path removed.** On direct
+  instruction (relayed from Terry): the Hosting section (the private
+  dinners paragraph over the dinner photo) is gone, with
+  `HostingCallout.jsx`, its copy and the dinner image variants; "If you
+  are raising, start early." and the "I'm raising" toggle are gone, so
+  the contact form has two modes, investor (the default) and deck
+  request. The raising mode's required-message validation, its subject
+  and body fallback in `submitContact`, and its copy are removed. The
+  "Hosting section" rule under Non-negotiable constraints no longer
+  applies.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

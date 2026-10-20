@@ -3,7 +3,6 @@ import { useState } from 'react';
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const initialValuesByMode = {
-  raising: { name: '', email: '', message: '' },
   investor: { name: '', email: '', ticketSize: '', sectors: '' },
   holdco: { name: '', email: '', firm: '', message: '' },
 };
@@ -13,16 +12,15 @@ const initialValuesByMode = {
  * submission status; delegates the actual send to `onSubmit(values)` so the
  * transport (Formspree, a serverless function, mailto) is swappable.
  *
- * Two modes with different fields — fund managers raising capital vs.
- * investors registering interest — sharing one status/error/submit flow
- * rather than being two separate hooks, since only the field set and
- * validation differ.
+ * Two modes with different fields (investors registering interest, and
+ * HoldCo deck requests) sharing one status/error/submit flow rather than
+ * being separate hooks, since only the field set differs.
  *
  * status: 'idle' | 'submitting' | 'success' | 'error'
  */
 export function useContactForm({ onSubmit } = {}) {
-  const [mode, setMode] = useState('raising');
-  const [values, setValues] = useState(initialValuesByMode.raising);
+  const [mode, setMode] = useState('investor');
+  const [values, setValues] = useState(initialValuesByMode.investor);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(null);
 
@@ -45,7 +43,6 @@ export function useContactForm({ onSubmit } = {}) {
   function validate() {
     if (!values.name.trim()) return 'Please add your name.';
     if (!EMAIL.test(values.email)) return 'Please add a valid email address.';
-    if (mode === 'raising' && !values.message.trim()) return 'Please add a short message.';
     return null;
   }
 
