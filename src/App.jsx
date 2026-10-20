@@ -1,6 +1,5 @@
 import GlobeBackground from './components/GlobeBackground.jsx';
 import Masthead from './components/Masthead.jsx';
-import Hero from './components/Hero.jsx';
 import NowBuilding from './components/NowBuilding.jsx';
 import Services from './components/Services.jsx';
 import HostingCallout from './components/HostingCallout.jsx';
@@ -14,7 +13,6 @@ export default function App() {
       <GlobeBackground />
       <Masthead />
       <main id="top">
-        <Hero />
         <NowBuilding />
         <Services />
         <HostingCallout />

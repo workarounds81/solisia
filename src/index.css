@@ -46,7 +46,7 @@
     font-feature-settings: 'kern' 1;
   }
 
-  /* Weight is set per component: 300 for hero/hosting/contact, 400 elsewhere. */
+  /* Weight is set per component: 300 for Now building/hosting/contact, 400 elsewhere. */
   h1,
   h2,
   h3 {
@@ -65,36 +65,7 @@
   }
 }
 
-/* One page-load reveal, hero only. Siblings stagger by source order. */
 @layer components {
-  .reveal {
-    opacity: 0;
-    transform: translateY(14px);
-    animation: rise 0.9s cubic-bezier(0.22, 0.7, 0.3, 1) forwards;
-  }
-  .reveal:nth-child(2) {
-    animation-delay: 0.13s;
-  }
-  .reveal:nth-child(3) {
-    animation-delay: 0.24s;
-  }
-  .reveal:nth-child(4) {
-    animation-delay: 0.35s;
-  }
-  @keyframes rise {
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-  }
-
   /* Rings rippling out of the Now building dot. The ring grows by animating
      its inset rather than scaling it, so the stroke stays hairline instead
      of thickening as it expands. Stagger with animation-delay. */

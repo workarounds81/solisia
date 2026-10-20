@@ -20,9 +20,9 @@ export default function NowBuilding() {
           </span>
           {nowBuilding.kicker}
         </p>
-        <h2 className="max-w-[20ch] text-4xl font-light leading-[1.1] tracking-[-0.02em] md:text-6xl">
+        <h1 className="max-w-[20ch] text-4xl font-light leading-[1.1] tracking-[-0.02em] md:text-6xl">
           {nowBuilding.headline} <em className="italic">{nowBuilding.headlineEmphasis}</em>
-        </h2>
+        </h1>
         <p className="mt-8 max-w-[60ch] text-lg leading-[1.7] text-dark/80">{nowBuilding.lede}</p>
 
         <Photo
@@ -31,6 +31,7 @@ export default function NowBuilding() {
           sizes="(min-width: 1920px) 1530px, (min-width: 1536px) 1360px, (min-width: 1152px) 1104px, calc(100vw - 48px)"
           className="mt-12 aspect-[3/2] md:aspect-[21/9]"
           imgClassName="object-[center_30%]"
+          priority
         />
 
         <ul className="mt-12 grid gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-10">

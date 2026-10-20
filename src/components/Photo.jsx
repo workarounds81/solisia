@@ -18,7 +18,9 @@ export const hasPhoto = (name) => Boolean(manifest[name]);
  * colour so the reserved space reads as part of the picture before it
  * arrives, then the image fades in rather than popping.
  */
-export default function Photo({ name, alt, sizes, className = '', imgClassName = '' }) {
+// `priority` is for a photo in the first screen: fetch it straight away
+// at high priority instead of waiting for the lazy-load scroll check.
+export default function Photo({ name, alt, sizes, className = '', imgClassName = '', priority = false }) {
   const [loaded, setLoaded] = useState(false);
   const spec = manifest[name];
   if (!spec) return null;
@@ -37,7 +39,8 @@ export default function Photo({ name, alt, sizes, className = '', imgClassName =
           alt={alt}
           width={spec.width}
           height={spec.height}
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : undefined}
           decoding="async"
           onLoad={() => setLoaded(true)}
           className={`h-full w-full object-cover transition-opacity duration-700 ${

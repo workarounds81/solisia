@@ -13,15 +13,6 @@ export const nav = [
   { href: '#contact', label: 'Contact' },
 ];
 
-export const hero = {
-  kicker: 'Investor Relations & Capital Advisory',
-  headline: 'Capital moves after the meeting,',
-  headlineEmphasis: 'not before it.',
-  lede:
-    'Solisia is an investor relations and capital advisory firm in Asia. We work with founders and fund managers across Southeast Asia on how they are positioned, who they meet, and what happens in the eighteen months after the cheque clears.',
-  meta: ['Asia'],
-};
-
 /**
  * Thesis only, drawn from the HoldCo investment deck. Raise size, valuation
  * cap, instrument, token, yields and financials are deliberately absent:

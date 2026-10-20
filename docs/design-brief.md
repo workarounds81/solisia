@@ -479,6 +479,18 @@ gives no evidence either way for the off-white token.
   rather than `scale` so the stroke stays 1.5px. Under
   prefers-reduced-motion only the static dot shows.
 
+- **Hero removed; the page opens on Now building.** On direct instruction
+  the hero (kicker "Investor Relations & Capital Advisory", "Capital
+  moves after the meeting, not before it.", its lede and the "Asia" meta
+  line) is gone, along with `Hero.jsx`, `site.js`'s `hero` and the
+  `.reveal` load animation it alone used. Now building's headline becomes
+  the page's only `h1`. The street photo, now in the first screen, loads
+  eagerly at high fetch priority (`Photo`'s `priority` prop) instead of
+  lazily. What Solisia is as an advisory firm is still said in the page
+  title, meta and share description, the "Alongside our advisory work"
+  lede, Services and the footer. Entries above that mention the hero
+  describe the site before this change.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.
