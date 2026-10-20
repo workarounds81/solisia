@@ -208,12 +208,7 @@ export const trackRecord = {
 };
 
 export const contact = {
-  // Investors invest directly with the company, never through Solisia —
-  // "register your mandate" rather than anything implying Solisia arranges
-  // or executes the investment itself.
   investorHeading: 'Access curated dealflow, direct.',
-  investorPitch:
-    'We work with a network of family offices, funds and private investors across Asia. Register your mandate and we will flag relevant raises — you invest directly with the company, never through us.',
   holdcoHeading: 'The HoldCo deck, on request.',
   holdcoPitch:
     'Tell us who you are and we will send the deck. It is shared privately, with accredited and institutional investors only.',

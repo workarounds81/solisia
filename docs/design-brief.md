@@ -512,6 +512,12 @@ gives no evidence either way for the off-white token.
   "Hosting section" rule under Non-negotiable constraints no longer
   applies.
 
+- **Investor pitch removed.** On direct instruction (relayed from
+  Terry) the paragraph under "Access curated dealflow, direct." is gone.
+  It carried the clearest on-page statement that investors invest
+  directly with the company, never through Solisia; the footer legal
+  text (no client assets or monies held) remains as the safeguard.
+
 - Copy is centralised in `src/content/site.js`; components hold no prose.
 - Contact form has no backend. `submitContact` POSTs to `VITE_CONTACT_ENDPOINT`
   if set, otherwise falls back to a pre-filled `mailto:`.

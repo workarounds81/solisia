@@ -26,7 +26,7 @@ const headingFor = {
   investor: contact.investorHeading,
   holdco: contact.holdcoHeading,
 };
-const pitchFor = { investor: contact.investorPitch, holdco: contact.holdcoPitch };
+const pitchFor = { holdco: contact.holdcoPitch };
 
 export default function Contact() {
   const { mode, switchMode, values, status, error, handleChange, handleSubmit } = useContactForm({
